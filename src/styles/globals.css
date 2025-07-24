@@ -50,8 +50,7 @@
 }
 
 @theme {
-  --font-iransans:
-    "IRANSansXFaNum-Regular", ui-sans-serif, system-ui, sans-serif;
+  --font-iransans: "Iransans", ui-sans-serif, system-ui, sans-serif;
   --font-kabel: "kabel", ui-sans-serif, system-ui, sans-serif;
 
   --radius-me-radius-card: 35px;
@@ -96,6 +95,8 @@
   --color-me-sidebar-accent-foreground: oklch(0.205 0 0);
   --color-me-sidebar-border: oklch(0.922 0 0);
   --color-me-sidebar-ring: oklch(0.708 0 0);
+
+  --line-offset: 150px;
 }
 
 @layer base {
@@ -141,25 +142,158 @@
   }
 }
 
-.line_width_animation_215 {
+.line_x_animation::before,
+.line_x_animation::after {
+  content: "";
   --a-easing: cubic-bezier(0.645, 0.045, 0.355, 1);
   --a-duration: 1.08s;
   --a-delay: 0.15s;
   --line-gap: 1;
   --line-width: 1;
-  animation: intro_width_215 var(--a-duration) var(--a-easing) forwards;
+  --line-color: rgba(255, 255, 255, calc(0.15 * 3));
+  --line-fade-stop: 93%;
+
+  width: calc(100% + var(--line-offset));
+  left: calc(var(--line-offset) / 2 * -1);
+  position: absolute;
+  height: 1px;
+  animation: intro_x var(--a-duration) var(--a-easing) forwards;
   animation-delay: calc(var(--a-delay) + 0.1s);
-  background-size: 4px;
+  background: linear-gradient(
+    to right,
+    var(--line-color),
+    var(--line-color) 50%,
+    transparent 0,
+    transparent
+  );
+  background-size: 4px 1px;
+  -webkit-mask:
+    linear-gradient(
+      to left,
+      var(--color-m-background) var(--line-fade-stop),
+      transparent
+    ),
+    linear-gradient(
+      to right,
+      var(--color-m-background) var(--line-fade-stop),
+      transparent
+    ),
+    linear-gradient(black, black);
+  mask-composite: exclude;
 }
 
-@keyframes intro_width_215 {
+.line_x_animation::before {
+  top: 0;
+}
+
+.line_x_animation::after {
+  bottom: 0;
+}
+@keyframes intro_x {
   0% {
     opacity: 1;
     width: 0%;
   }
 
   to {
-    width: 215%;
+    width: calc(100% + var(--line-offset));
     opacity: 0.6;
+  }
+}
+
+.line_y_animation {
+  content: "";
+  --a-easing: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --a-duration: 1.08s;
+  --a-delay: 0.15s;
+  --line-color: rgba(255, 255, 255, calc(0.15 * 3));
+  --line-fade-stop: 93%;
+
+  height: calc(100% + var(--line-offset));
+  top: calc(var(--line-offset) / 2 * -1);
+  position: absolute;
+  width: 1px;
+  animation: intro_y var(--a-duration) var(--a-easing) forwards;
+  animation-delay: calc(var(--a-delay) + 0.1s);
+  background: linear-gradient(
+    to bottom,
+    var(--line-color),
+    var(--line-color) 50%,
+    var(--line-color) 75%,
+    transparent
+  );
+  background-size: 1px 4px;
+  -webkit-mask:
+    linear-gradient(
+      to top,
+      var(--color-m-background) var(--line-fade-stop),
+      transparent
+    ),
+    linear-gradient(
+      to bottom,
+      var(--color-m-background) var(--line-fade-stop),
+      transparent
+    ),
+    linear-gradient(black, black);
+  mask-composite: exclude;
+}
+
+@keyframes intro_y {
+  0% {
+    opacity: 1;
+    height: 0%;
+  }
+
+  to {
+    height: calc(100% + var(--line-offset));
+    opacity: 0.6;
+  }
+}
+
+.line-anim::before {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  height: 1px;
+  width: 0px;
+  z-index: 3;
+  animation: 1s ease 0.1s 1 normal forwards running k-iAsmag;
+}
+.line-anim::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  height: 1px;
+  width: 0px;
+  animation: 1s cubic-bezier(0.25, 1, 0.5, 1) 0.05s 1 normal forwards running
+    k-bHvlyS;
+}
+
+@keyframes k-iAsmag {
+  0% {
+    background: transparent;
+  }
+  50% {
+    background: var(--color-m-text);
+  }
+  100% {
+    width: 100%;
+
+    background: transparent;
+  }
+}
+
+@keyframes k-bHvlyS {
+  0% {
+    background: transparent;
+  }
+
+  50% {
+    background: var(--color-m-text);
+  }
+  100% {
+    width: 100%;
+    opacity: 0.2;
+    background: var(--color-m-text);
   }
 }

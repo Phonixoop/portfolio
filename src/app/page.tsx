@@ -16,6 +16,12 @@ import BrandTailwind from "~/app/ui/svgs/brands/tailwind";
 import BrandCSharp from "~/app/ui/svgs/brands/csharp";
 import BrandSocketIO from "~/app/ui/svgs/brands/socketio";
 import { cn } from "~/lib/utils";
+import { TextAnimate } from "~/app/components/magicui/text-animate";
+import { HyperText } from "~/app/components/magicui/hyper-text";
+import { HyperText2 } from "~/app/components/magicui/hyper-text-2";
+import StaggerContainer from "~/app/motion/stagger-container";
+import { projects } from "~/app/projects";
+import { MotionEl } from "~/app/motion/motion-element";
 
 const skills = [
   {
@@ -51,13 +57,18 @@ export default async function Home() {
         {/* Left Column:
       - `lg:col-span-1`: On large screens, this column takes up 1 of the 3 grid units.
     */}
-        <div className="flex w-full flex-col items-stretch justify-center gap-9 lg:col-span-5">
-          <header className="pl-16">
+        <div className="w-full flex-col items-stretch justify-center gap-9 lg:col-span-5">
+          <header className="text-m-text block pb-8.5 pl-16">
             <LogoSVG />
           </header>
 
-          <div className="rounded-me-radius-card bg-m-dark relative flex flex-col gap-20 p-16">
-            <FloatDiv className="line_width_animation_215 via-m-text absolute top-0 left-0 h-[1px] w-screen bg-gradient-to-r from-transparent to-transparent" />
+          <div className="rounded-me-radius-card line_x_animation relative flex flex-col gap-20 p-16">
+            <div
+              className="line_y_animation top-0 right-0"
+              aria-hidden="true"
+            />
+            <div className="line_y_animation top-0 left-0" aria-hidden="true" />
+            {/* <FloatDiv className=" absolute top-0 left-0 h-[1px] w-screen" /> */}
             <div className="flex w-full flex-col gap-2">
               <h3 className="text-m-primary font-kabel text-xs">
                 Hi, my name is
@@ -82,30 +93,35 @@ export default async function Home() {
                 <h3 className="text-xl">Technologies I Use</h3>
 
                 {/* The key is adding "shrink-0" to the link to prevent it from wrapping */}
-                <Link
+                <MotionEl
+                  as={Link}
                   href={"/skills"}
                   className="border-m-primary flex items-center justify-between gap-2 border-b"
                 >
                   <span>See all</span>
                   <ChevronRight className="mt-1 -mr-1 size-4" />
-                </Link>
+                </MotionEl>
               </div>
 
-              <div className="flex w-full flex-wrap justify-between gap-3">
+              <StaggerContainer className="flex w-full flex-wrap justify-between gap-3">
                 {skills.map((skill, i) => {
                   return (
-                    <Link
+                    <MotionEl
+                      as={Link}
                       href={skill.link ?? "#"}
                       target="blank"
                       key={i}
+                      fade="in"
+                      blur
+                      slideFrom="left"
                       className="bg-m-light flex flex-col items-center justify-between gap-1 rounded-xl p-5"
                     >
                       {skill.icon}
                       <span className="text-m-text"> {skill.title}</span>
-                    </Link>
+                    </MotionEl>
                   );
                 })}
-              </div>
+              </StaggerContainer>
             </div>
 
             <div className="flex w-full items-center justify-between">
@@ -135,23 +151,59 @@ export default async function Home() {
       - `lg:col-span-2`: On large screens, this column takes up 2 of the 3 grid units.
     */}
         <div className="rounded-me-radius-card text-me-foreground flex flex-col items-center justify-between gap-4 lg:col-span-7">
-          <div className="text-m-primary font-kabel bg-m-primary rounded-t-me-radius-card justify-betweenp flex w-full items-center p-4 px-10">
+          <div className="text-m-primary font-kabel bg-m-primary rounded-t-me-radius-card flex w-full items-center justify-between p-4 px-10">
             <h3 className="text-m-text flex flex-col text-3xl">
               <span>Project</span> <span>Snapshots</span>
             </h3>
 
             {/* The key is adding "shrink-0" to the link to prevent it from wrapping */}
-            <Link
-              href={"/skills"}
+            <MotionEl
+              as={Link}
+              href={"/projects"}
               className="border-m-text text-m-text flex items-center justify-between gap-2 border-b"
             >
               <span>See all</span>
               <ChevronRight className="mt-1 -mr-1 size-4" />
-            </Link>
+            </MotionEl>
           </div>
 
-          <div className="bg-m-dark rounded-b-me-radius-card h-full w-full p-6 text-2xl font-semibold">
-            Right Column
+          <div className="rounded-b-me-radius-card text-m-text flex h-full w-full items-center justify-center text-2xl font-semibold">
+            <StaggerContainer className="felx m-auto h-full w-full flex-col items-center justify-center p-6">
+              {projects.map((project, i) => (
+                <MotionEl
+                  key={i}
+                  as={Link}
+                  href={project.href}
+                  fade="in"
+                  blur
+                  slideFrom="top"
+                  className="font-iransans hover:bg-m-light relative flex w-[calc(100%)] items-center gap-3 overflow-hidden rounded-xl p-3 text-sm outline-0"
+                >
+                  <HyperText2
+                    className="text-m-text inline-block font-bold"
+                    duration={250}
+                  >
+                    {project.title}
+                  </HyperText2>
+                  <HyperText2
+                    className="text-m-text/70 inline-block font-light"
+                    duration={250}
+                    delay={250}
+                  >
+                    {project.description}
+                  </HyperText2>
+                  <div className="line-anim relative shrink grow basis-0" />
+                  <HyperText2
+                    duration={500}
+                    delay={100 * (i + 1) + 500}
+                    by="word"
+                    className="text-m-text block text-base"
+                  >
+                    {project.year}
+                  </HyperText2>
+                </MotionEl>
+              ))}
+            </StaggerContainer>
           </div>
         </div>
       </div>
