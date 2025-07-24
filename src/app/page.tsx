@@ -62,48 +62,77 @@ export default async function Home() {
             <LogoSVG />
           </header>
 
-          <div className="rounded-me-radius-card line_x_animation relative flex flex-col gap-20 p-16">
+          <div className="rounded-me-radius-card line_x_animation relative flex flex-col gap-20 p-6 lg:p-16">
             <div
               className="line_y_animation top-0 right-0"
               aria-hidden="true"
             />
             <div className="line_y_animation top-0 left-0" aria-hidden="true" />
             {/* <FloatDiv className=" absolute top-0 left-0 h-[1px] w-screen" /> */}
-            <div className="flex w-full flex-col gap-2">
-              <h3 className="text-m-primary font-kabel text-xs">
+            <StaggerContainer className="flex w-full flex-col gap-2">
+              <MotionEl
+                fade="in"
+                slideFrom="left"
+                as="h3"
+                className="text-m-primary font-kabel text-xs"
+              >
                 Hi, my name is
-              </h3>
-              <h1 className="text-m-text font-kabel pb-2 text-4xl">
+              </MotionEl>
+              <MotionEl
+                as="h1"
+                fade="in"
+                slideFrom="left"
+                className="text-m-text font-kabel pb-2 text-4xl"
+              >
                 Ali Hassanzadeh.
-              </h1>
-              <h2 className="text-m-muted-sub font-kabel pb-3 text-2xl">
+              </MotionEl>
+              <MotionEl
+                as="h2"
+                fade="in"
+                slideFrom="left"
+                className="text-m-muted-sub font-kabel pb-3 text-2xl"
+              >
                 Full-stack Software Developer
-              </h2>
-              <p className="text-m-muted font-iransans text-justify">
+              </MotionEl>
+              <MotionEl
+                as="p"
+                fade="in"
+                slideFrom="left"
+                className="text-m-muted font-iransans text-justify"
+              >
                 I am a Software Engineer with practical experience in web
                 development, windows software programs and developing automated
                 systems. My goal is to combine creative thinking and design with
                 an analytical approach to solve problems at the intersection of
                 business and technology.
-              </p>
-            </div>
+              </MotionEl>
+            </StaggerContainer>
 
             <div className="flex w-full flex-col items-center justify-center gap-2">
-              <div className="text-m-primary font-kabel flex w-full items-center justify-between">
-                <h3 className="text-xl">Technologies I Use</h3>
+              <StaggerContainer className="text-m-primary font-kabel flex w-full items-center justify-between">
+                <MotionEl
+                  as="h3"
+                  fade="in"
+                  slideFrom="left"
+                  className="text-sm lg:text-xl"
+                >
+                  Technologies I Use
+                </MotionEl>
 
                 {/* The key is adding "shrink-0" to the link to prevent it from wrapping */}
                 <MotionEl
                   as={Link}
+                  fade="in"
+                  slideFrom="left"
                   href={"/skills"}
-                  className="border-m-primary flex items-center justify-between gap-2 border-b"
+                  className="border-m-primary flex items-center justify-between gap-2 border-b text-sm lg:text-base"
                 >
                   <span>See all</span>
-                  <ChevronRight className="mt-1 -mr-1 size-4" />
+                  <ChevronRight className="mt-1 -mr-2 size-5" />
                 </MotionEl>
-              </div>
+              </StaggerContainer>
 
-              <StaggerContainer className="flex w-full flex-wrap justify-between gap-3">
+              <StaggerContainer className="flex w-full flex-col justify-between gap-3 lg:flex-row lg:flex-wrap">
                 {skills.map((skill, i) => {
                   return (
                     <MotionEl
@@ -112,9 +141,9 @@ export default async function Home() {
                       target="blank"
                       key={i}
                       fade="in"
-                      blur
                       slideFrom="left"
-                      className="bg-m-light flex flex-col items-center justify-between gap-1 rounded-xl p-5"
+                      blur
+                      className="bg-m-dark flex flex-row items-center justify-between gap-1 rounded-xl p-5 lg:flex-col"
                     >
                       {skill.icon}
                       <span className="text-m-text"> {skill.title}</span>
@@ -124,26 +153,41 @@ export default async function Home() {
               </StaggerContainer>
             </div>
 
-            <div className="flex w-full items-center justify-between">
-              <Link
+            <StaggerContainer className="flex w-full items-center justify-between gap-2 rounded-xl">
+              <MotionEl
+                as={Link}
+                fade="in"
+                slideFrom="left"
                 href={"https://www.linkedin.com/in/ali-hassanzadeh-166367165/"}
                 target="blank"
-                className="bg-m-light rounded-xl p-1"
+                className="bg-m-dark rounded-xl p-1"
               >
                 {" "}
                 <IconBrandLinkedin className="stroke-m-text size-7" />
-              </Link>
-              <div className="flex items-center justify-center gap-2">
+              </MotionEl>
+              <MotionEl
+                as={Link}
+                fade="in"
+                slideFrom="left"
+                href={"mailto:ali.hassanzadeh78@gmail.com"}
+                className="bg-m-dark flex items-center justify-center gap-2 rounded-xl px-2 py-1"
+              >
                 <IconMail className="stroke-m-text size-7 fill-none" />
-                <span className="text-m-text">
+                <span className="text-m-text hidden lg:block">
                   ali.hassanzadeh78@gmail.com{" "}
                 </span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
+              </MotionEl>
+              <MotionEl
+                as={Link}
+                fade="in"
+                slideFrom="left"
+                href={"tel:+989128045817"}
+                className="bg-m-dark flex items-center justify-center gap-2 rounded-xl px-2 py-1"
+              >
                 <IconDeviceMobile className="stroke-m-text size-7 fill-none" />
                 <span className="text-m-text">+98 912 80 45 817</span>
-              </div>
-            </div>
+              </MotionEl>
+            </StaggerContainer>
           </div>
         </div>
 
@@ -157,13 +201,14 @@ export default async function Home() {
             </h3>
 
             {/* The key is adding "shrink-0" to the link to prevent it from wrapping */}
+
             <MotionEl
               as={Link}
-              href={"/projects"}
-              className="border-m-text text-m-text flex items-center justify-between gap-2 border-b"
+              href={"/skills"}
+              className="border-m-text text-m-text flex items-center justify-between gap-2 border-b text-sm lg:text-base"
             >
               <span>See all</span>
-              <ChevronRight className="mt-1 -mr-1 size-4" />
+              <ChevronRight className="mt-1 -mr-2 size-5" />
             </MotionEl>
           </div>
 
