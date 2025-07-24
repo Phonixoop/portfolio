@@ -175,7 +175,6 @@ export default async function Home() {
                   as={Link}
                   href={project.href}
                   fade="in"
-                  blur
                   slideFrom="top"
                   className="font-iransans hover:bg-m-light relative flex w-[calc(100%)] items-center gap-3 overflow-hidden rounded-xl p-3 text-sm outline-0"
                 >
@@ -195,7 +194,6 @@ export default async function Home() {
                   <div className="line-anim relative shrink grow basis-0" />
                   <HyperText2
                     duration={500}
-                    delay={100 * (i + 1) + 500}
                     by="word"
                     className="text-m-text block text-base"
                   >
