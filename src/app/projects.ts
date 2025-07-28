@@ -41,10 +41,10 @@ export const projects = [
     href: "#",
   },
   {
-    title: "Performance Monitoring",
+    title: "From Manual Chaos to Automated Insight",
     description: "Automated KPI tracking with real-time dashboards",
     year: "2023",
-    href: "#",
+    href: "/projects/performance-automation",
   },
   {
     title: "Room Reservation",

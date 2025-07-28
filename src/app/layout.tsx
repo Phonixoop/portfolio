@@ -4,6 +4,8 @@ import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import Header from "~/app/header";
+import Provider from "~/app/provider";
 
 export const metadata: Metadata = {
   title: "Ali H.",
@@ -20,9 +22,20 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} dark font-iransans`}>
+    <html
+      suppressHydrationWarning
+      lang="en"
+      className={`${geist.variable} font-iransans`}
+    >
       <body className="bg-m-background">
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <Provider>
+          <Header />
+
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <div className="noise-overlay">
+            <div className="noise-overlay-child" />
+          </div>
+        </Provider>
       </body>
     </html>
   );
