@@ -21,7 +21,7 @@ export const blogPost = {
   
   ### Scaling Nationwide Performance Tracking in a Closed System
   
-  In 1399 (2020), _Atieh Sazan Omid Nasl Emrooz_ — a subsidiary of Iran's health insurance services — faced a serious challenge. The central insurance organization declared that **funding would now depend on personnel performance**.
+  In 2020, Atieh Sazan Omid Nasl Emrooz — a subsidiary of Iran's health insurance services — faced a serious challenge when the central insurance organization tied employees’ salaries and benefits in insurance branches to their individual performance.
   
   Simple in theory — complex in execution. The data we needed lived inside **Rasa**, a **closed web system** with no API access. The only way to get performance data was to log in with employee credentials and manually download Excel reports — dozens of them — for each person, branch, and metric.
   
@@ -144,11 +144,8 @@ export const blogPost = {
       title: "🔧 Team & Maintenance",
       content: `## 🔧 Team & Maintenance
   
-  This system was built primarily by myself as a **contract-based full-stack developer**, working closely with a **senior PHP/Android developer** on the company's IT team.
-  
-  While I handled the majority of coding and architecture, we collaborated on workflows, API handling, deployment, and long-term maintainability.
-  
-  The system is still in use today — updated by the internal team — and continues to save thousands of hours of manual work.`,
+   We collaborated on workflows, API handling, deployment, and long-term maintainability.
+   The system is still in use today — updated by the internal team — and continues to save thousands of hours of manual work.`,
     },
     {
       id: "outcome",
@@ -172,7 +169,7 @@ export const blogPost = {
   
   Despite all the technical restrictions — closed systems, Excel limits, unstable pages, and even OTP logins — we built a resilient robot, an intelligent dashboard, and a robust backend to keep it all running.
   
-  It wasn't easy. It still isn't. But it works — at scale — and it's being maintained and used daily to make smarter decisions.
+  Despite all that, it works — at scale — and it's being maintained and used daily to make smarter decisions.
   
   And while I was only brought in on contract, I say "we" — because this project only succeeded through true collaboration.`,
     },
