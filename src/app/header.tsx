@@ -8,10 +8,10 @@ import Link from "next/link";
 export default function Header() {
   return (
     <header
-    // className={cn(
-    //   "from-m-dark/80 via-m-dark/50 fixed top-0 z-[60] flex h-12 w-full flex-col items-center justify-between bg-gradient-to-b to-transparent py-5 sm:w-full sm:p-0 md:max-w-full md:px-2",
-    //   //  "bg-gradient-to-l from-secbuttn/50 via-transparent to-transparent",
-    // )}
+      className={cn(
+        "from-m-dark/80 via-m-dark/50 fixed top-0 z-[60] flex h-12 w-full flex-row items-center justify-start bg-gradient-to-b to-transparent py-5 sm:w-full sm:p-0 md:max-w-full md:px-2",
+        //  "bg-gradient-to-l from-secbuttn/50 via-transparent to-transparent",
+      )}
     >
       {/* <button
         className="text-m-text"

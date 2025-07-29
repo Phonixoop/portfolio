@@ -292,31 +292,59 @@
   }
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none !important;
+}
+
+::view-transition-group(root) {
+  z-index: auto !important;
+}
+
+::view-transition-image-pair(root) {
+  isolation: isolate;
+  will-change: transform, opacity, clip-path;
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 10000;
+  animation: none !important;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+  animation: none !important;
+}
+
+/* cubic-bezier(0.22, 1, 0.36, 1) */
 ::view-transition-old(.slide-up),
 ::view-transition-new(.slide-up) {
-  animation: cubic-bezier(0.22, 1, 0.36, 1) slideUp 500ms;
+  animation: cubic-bezier(0.87, 0, 0.13, 1) forwards slideUp 1500ms;
 }
 ::view-transition-old(.slide-down),
 ::view-transition-new(.slide-down) {
-  animation: cubic-bezier(0.22, 1, 0.36, 1) slideDown 500ms;
+  animation: cubic-bezier(0.87, 0, 0.13, 1) forwards slideDown 1500ms;
 }
 ::view-transition-old(.exit-down),
 ::view-transition-new(.exit-down) {
-  animation: cubic-bezier(0.22, 1, 0.36, 1) exitDown 500ms;
+  animation: cubic-bezier(0.87, 0, 0.13, 1) forwards exitDown 1500ms;
 }
 
 ::view-transition-old(.exit-up),
 ::view-transition-new(.exit-up) {
-  animation: cubic-bezier(0.22, 1, 0.36, 1) exitUp 500ms;
+  animation: cubic-bezier(0.87, 0, 0.13, 1) forwards exitUp 1500ms;
 }
 
 @keyframes slideUp {
   from {
     transform: translateY(100%);
+    clippath: polygon (0% 100%, 100% 100%, 100% 100%, 0% 100%);
     opacity: 0;
   }
   to {
     transform: translateY(0);
+    clippath: polygon (0% 100%, 100% 100%, 100% 0%, 0% 0%);
     opacity: 1;
   }
 }
@@ -332,24 +360,24 @@
   }
 }
 
-@keyframes exitDown {
+@keyframes exitUp {
   from {
-    transform: translateY(0%);
     opacity: 1;
+    transform: translateY(0);
   }
   to {
-    transform: translateY(100%);
-    opacity: 0;
+    opacity: 0.2;
+    transform: translateY(-35%);
   }
 }
 
-@keyframes exitUp {
+@keyframes exitDown {
   from {
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0);
   }
   to {
-    transform: translateY(-100%);
-    opacity: 0;
+    opacity: 0.2;
+    transform: translateY(35%);
   }
 }
