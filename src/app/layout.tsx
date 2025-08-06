@@ -3,7 +3,6 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
-import { TRPCReactProvider } from "~/trpc/react";
 import Header from "~/app/header";
 import Provider from "~/app/provider";
 
@@ -25,13 +24,13 @@ export default function RootLayout({
     <html
       suppressHydrationWarning
       lang="en"
-      className={`${geist.variable} font-iransans`}
+      className={`${geist.variable} bg-m-background font-iransans relative`}
     >
-      <body className="bg-m-background">
+      <body className="bg-m-background relative">
         <Provider>
-          <Header />
+          {/* <Header /> */}
 
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          {children}
           <div className="noise-overlay">
             <div className="noise-overlay-child" />
           </div>

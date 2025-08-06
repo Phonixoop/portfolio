@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.2",
+    "@gsap/react": "^2.1.2",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.4.4",
@@ -34,6 +35,9 @@
     "@trpc/server": "^11.0.0",
     "@types/mdx": "^2.0.13",
     "clsx": "^2.1.1",
+    "flubber": "^0.4.2",
+    "gsap": "^3.13.0",
+    "locomotive-scroll": "^5.0.0-beta.8",
     "lucide-react": "^0.525.0",
     "motion": "^12.23.7",
     "next": "^15.2.3",
@@ -50,6 +54,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.0.15",
+    "@types/flubber": "^0.4.0",
+    "@types/locomotive-scroll": "^4.1.4",
     "@types/node": "^20.14.10",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

@@ -272,7 +272,7 @@
   position: var(--framer-canvas-fixed-position, fixed);
   right: 0;
   top: 0;
-  z-index: 10;
+  z-index: 100;
 }
 
 .noise-overlay-child {
@@ -379,5 +379,22 @@
   to {
     opacity: 0.2;
     transform: translateY(35%);
+  }
+}
+
+.hide-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
   }
 }
