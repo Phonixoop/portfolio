@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { interpolate } from "flubber";
 import { motion, useAnimation, type Easing } from "motion/react";
 import { animate } from "motion/react";
@@ -43,9 +43,12 @@ export default function SVGMorph({
   const progress = useMotionValue(0);
   const controls = useAnimation();
 
-  const d = useTransform(progress, [0, 1], [paths[0], paths[1]], {
-    mixer: (a, b) => interpolate(a, b, { maxSegmentLength: 1 }),
-  });
+  const morphFn = useMemo(
+    () => interpolate(paths[0], paths[1], { maxSegmentLength: 1 }),
+    [paths],
+  );
+
+  const d = useTransform(progress, (latest) => morphFn(latest));
 
   const fill = useTransform(progress, [0, 1], ["none", fillColor]);
   const stroke = useTransform(progress, [0, 1], [strokeColor, "none"]);

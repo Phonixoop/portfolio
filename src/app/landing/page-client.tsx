@@ -1,10 +1,16 @@
 // AliLogoAnimation.tsx
 "use client";
+import { Canvas } from "@react-three/fiber";
+import { Volume2Icon } from "lucide-react";
 import { motion, useAnimation, type Variants } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { TubeCurve } from "~/app/components/me/os1-animation";
+import { helloPath2 } from "~/app/components/me/preloader";
 import SVGMorph from "~/app/components/me/svg-morph";
 import { ali, hello, i, s, my, name } from "~/app/landing/paths";
+import { aliPath } from "~/app/ui/svgs/ali";
+import { cn } from "~/lib/utils";
 
 const pathSign =
   "M1.87402 158.579C5.18891 155.264 7.7253 152.727 13.8151 146.361C19.0951 140.842 28.7447 130.603 34.6922 124.509C42.4132 116.598 47.8806 111.182 53.87 104.494C58.1567 99.707 64.8903 92.5069 73.6588 79.9881C78.2498 73.4337 82.1511 65.812 85.2526 58.793C91.0277 45.723 92.2799 31.6921 92.0037 19.8431C91.7795 10.2245 87.2741 6.52915 83.2268 3.16823C78.5446 -0.719878 68.8581 2.59482 62.8687 6.62542C55.483 11.5957 54.8954 16.2562 52.945 20.1612C48.6502 28.76 52.3674 39.6947 54.0458 43.7421C55.908 48.2327 60.4537 51.414 69.9087 56.5705C77.7379 60.8404 88.873 62.3046 98.6293 63.5602C104.485 64.3139 108.444 64.2634 115.103 64.6819C127.264 65.4463 140.22 63.9955 149.83 62.1874C162.718 59.7625 170.079 54.2434 175.834 50.4681C180.136 47.6462 182.669 43.3612 185.884 40.4188C189.341 37.2544 189.659 31.9098 189.939 29.8212C190.07 28.8464 189.667 28.0089 189.111 27.8582C187.718 27.4814 180.547 22.8065 175.834 32.5C171.983 40.4221 171.368 62.5808 167.685 72.0525C160.159 91.4069 160.921 101.874 162.307 108.336C162.965 111.407 166.773 111.978 169.686 112.396C179.505 113.807 183.506 110.596 186.306 110.299C192.501 109.642 182.418 122.55 179.488 129.393C175.906 137.76 175.989 149.873 177.931 155.079C179.568 159.467 187.122 157.741 196.582 155.804C209.36 153.186 218.112 149.371 219.924 149.785C226.396 151.265 222.297 169.695 225.361 174.609C227.562 178.138 233.171 178.108 240.935 178.388C246.761 178.599 256.434 178.116 284.066 172.035C311.698 165.953 357.002 154.075 381.169 147.956C406.896 141.442 410.358 141.284 413.974 140.447C418.143 140.162 421.525 139.886 424.718 139.468C426.807 139.325 429.846 139.325 432.976 139.325";
@@ -106,28 +112,133 @@ export default function LandingPageClient() {
   }, []);
 
   return (
-    <motion.div
-      variants={slideUp}
-      initial="initial"
-      animate="enter"
-      className="bg-m-background inset-0 flex flex-col items-center justify-center overflow-hidden"
-    >
+    <>
+      <motion.div
+        variants={slideUp}
+        initial="initial"
+        animate="enter"
+        className="bg-m-background flex h-screen flex-col items-center justify-center gap-20 overflow-hidden"
+      >
+        <h1
+          className={cn(
+            "overflow-hidden",
+            "font-kabel",
+            "flex flex-col items-center justify-center",
+            "text-xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-7xl 2xl:text-8xl",
+            "gap-2 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10",
+          )}
+        >
+          <div className="flex w-full items-center justify-start gap-2 sm:gap-4 lg:gap-6">
+            <span className="text-m-text flex items-center justify-center">
+              Code
+            </span>
+            <span className="text-m-text/20 flex items-center justify-center">
+              in
+            </span>
+            <span className="text-m-text/20 flex items-center justify-center">
+              rhythm
+            </span>
+          </div>
+
+          <div
+            className={cn(
+              "flex w-full items-center justify-center gap-2",
+              "ml-[97px] sm:ml-[177px] sm:gap-4 md:ml-[177px] lg:ml-[240px] lg:gap-6 xl:ml-[338px] 2xl:ml-[435px]",
+            )}
+          >
+            <span className="text-m-text col-start-3 row-start-2 flex items-center justify-center sm:leading-14 xl:leading-32">
+              Design
+            </span>
+            <span className="text-m-text/20 col-start-4 row-start-2 flex items-center justify-center">
+              within
+            </span>
+            <span className="text-m-text/20 col-start-5 row-start-2 flex items-center justify-center">
+              harmony
+            </span>
+          </div>
+        </h1>
+        <h2 className="text-m-foreground/40 font-iransans w-2xs text-center text-sm font-light md:text-base">
+          My Goal is to Solve Problems at the intersection of business and
+          technology
+        </h2>
+      </motion.div>
+      <div className="fixed bottom-10 flex w-full items-center justify-center">
+        <div className="flex max-w-md items-center justify-between gap-14 rounded-3xl p-5 backdrop-blur-xl">
+          <div className="relative flex h-[40px] w-56 items-center justify-between gap-2 px-3">
+            <div className="via-m-secondary absolute -top-2 left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+            <div className="flex h-[40px] items-center justify-center gap-2">
+              <div className="bg-m-secondary h-11/12 w-[0.5px] rounded-full" />
+              <div className="bg-m-secondary h-11/12 w-[0.5px]" />
+              <div className="bg-m-secondary h-11/12 w-[0.5px]" />
+            </div>
+            <div className="flex h-[40px] items-center justify-center gap-2">
+              <div className="bg-m-secondary h-11/12 w-[0.5px] rounded-full" />
+            </div>
+
+            <div className="via-m-secondary absolute -bottom-2 left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+          </div>
+          <div className="flex w-full items-center justify-center">
+            <motion.svg viewBox="0 0 99 105" className={"size-[100px]"}>
+              <motion.path
+                className="fill-m-text"
+                d={aliPath}
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{
+                  duration: 1.1,
+                  ease: [0.317, 0.803, 0.698, -0.024],
+                }}
+              />
+            </motion.svg>
+          </div>
+          <div className="justify-st flex w-full items-center">
+            <Volume2Icon className="text-m-primary size-10 rounded-full p-2 bg-blend-screen" />
+          </div>
+        </div>
+      </div>
+      <div className="h-screen bg-red-400"></div>
+    </>
+  );
+}
+
+/*  {" "}
       <Image
-        src={"/bg.png"}
-        width={1700}
-        height={1080}
-        className="h-screen object-cover"
-        quality={100}
-        alt="bg image"
-      />
-      <Image
-        src={"/bg.png"}
+        src={"/bg-linear.png"}
         width={1920}
         height={1080}
-        className="h-screen"
+        className="h-screen w-auto object-fill"
         quality={100}
         alt="bg image"
-      />
-    </motion.div>
-  );
+      />{" "}
+      <Image
+        src={"/bg-linear.png"}
+        width={1920}
+        height={1080}
+        className="h-screen w-auto object-fill"
+        quality={100}
+        alt="bg image"
+      />*/
+
+{
+  /* <h1 className="font-kabel font-res grid grid-cols-5 grid-rows-2 items-center justify-center leading-32">
+        <span className="text-m-text flex items-center justify-center">
+          Code
+        </span>
+        <span className="text-m-text/20 flex items-center justify-center">
+          in
+        </span>
+        <span className="text-m-text/20 flex items-center justify-center">
+          rhythm
+        </span>
+
+        <span className="text-m-text col-start-3 row-start-2 flex items-center justify-center">
+          Design
+        </span>
+        <span className="text-m-text/20 col-start-4 row-start-2 flex items-center justify-center">
+          within
+        </span>
+        <span className="text-m-text/20 col-start-5 row-start-2 flex items-center justify-center">
+          harmony
+        </span>
+      </h1> */
 }
