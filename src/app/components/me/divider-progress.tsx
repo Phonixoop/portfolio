@@ -13,8 +13,8 @@ import { cn } from "~/lib/utils";
 export default function DividerProgress({
   _index,
   length,
-  padding = 15,
-  gap = 0,
+  padding = 10,
+  gap = 5,
 }: {
   _index?: MotionValue;
   length: number;
@@ -157,7 +157,7 @@ export default function DividerProgress({
             // circle
             <motion.div
               key={k}
-              className="border-m-secondary text-m-background absolute top-1/2 left-0 flex size-6 -translate-1/2 flex-wrap items-center justify-center rounded-full border text-xs backdrop-blur-2xl"
+              className="border-m-secondary text-m-background absolute top-1/2 left-0 flex size-6 -translate-1/2 flex-wrap items-center justify-center rounded-full text-xs backdrop-blur-2xl"
               style={{ x: xPos, zIndex: length - k }}
             >
               {/* {Array.from({ length: length - k }).map((_, i) => (
@@ -168,7 +168,7 @@ export default function DividerProgress({
             ))} */}
               {/* Background layer with motion opacity */}
               <motion.div
-                className="bg-m-secondary absolute inset-[1px] z-0 rounded-full opacity-100"
+                className="bg-m-secondary absolute inset-[0px] z-0 rounded-full opacity-100"
 
                 // style={{ opacity }}
               />

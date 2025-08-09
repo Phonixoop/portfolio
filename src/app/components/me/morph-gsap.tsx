@@ -51,7 +51,7 @@ const SvgMorphGsap: React.FC<SvgMorphProps> = ({
   }, [morphPath, duration, repeat, yoyo, easing]);
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox={`0 0 ${width} ${height}`}>
       <path
         ref={pathRef}
         fill="none"
