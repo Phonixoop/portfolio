@@ -411,3 +411,18 @@
 .font-res {
   font-size: clamp(3.5rem, 12vw + 1rem, 12rem);
 }
+
+.liquid-filter {
+  -webkit-filter: url(#liquid);
+  filter: url(#liquid);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide Scrollbar for Firefox & Internet Explorer & Edge */
+.hide-scrollbar-firefox {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}

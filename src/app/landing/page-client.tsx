@@ -2,13 +2,26 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
 import { Volume2Icon } from "lucide-react";
-import { motion, useAnimation, type Variants } from "motion/react";
+import {
+  motion,
+  useAnimation,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+  type Variants,
+} from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import DividerProgress from "~/app/components/me/divider-progress";
 import { TubeCurve } from "~/app/components/me/os1-animation";
 import { helloPath2 } from "~/app/components/me/preloader";
+import StaggerPhraseAnim from "~/app/components/me/stagger-phrase-anim";
+import { slideUpWithY } from "~/app/components/me/stagger-phrase-anim/anim";
 import SVGMorph from "~/app/components/me/svg-morph";
+import BottomWidget from "~/app/landing/bottom-widget";
+import AnimatedHeading from "~/app/landing/heading";
 import { ali, hello, i, s, my, name } from "~/app/landing/paths";
+import SubHeading from "~/app/landing/sub-heading";
 import { aliPath } from "~/app/ui/svgs/ali";
 import { cn } from "~/lib/utils";
 
@@ -17,186 +30,40 @@ const pathSign =
 const pathRect = "M1919.5 0.5V1079.5H0.5V0.5H1919.5Z";
 const helloPath =
   "M17.5 371.4C17.5 371.4 207.47 270.53 251.08 109.77C260.21 77.32 260.08 51.46 251.08 35.77C240.36 16.95 201.39 2.56002 175.53 67.71C147.71 137.82 123.31 444.95 131.42 390.19C139.53 335.43 165.42 213.95 231.31 207C268.97 203 280.86 230.58 284.14 254.92C286.108 270.078 285.089 285.474 281.14 300.24C273.97 327.52 260.67 397.91 314.65 397.1C381.58 396.1 446.56 343.21 474.2 312.61C505.3 276.44 505.3 241.97 493.47 222.36C476.73 192.44 424 189.36 400.68 239.09C373.86 296.16 409.78 382.22 470.08 394.39C530.38 406.56 613.78 376.47 704.38 206.1C734.24 147.94 757.23 91.39 750.52 56.02C743.08 16.81 690.78 1.52001 657.65 47.32C610.65 112.32 595.87 313.94 622.91 355.85C649.95 397.76 727.7 418.02 792.6 345.71C857.5 273.4 925.8 157.15 939.14 89.48C953.14 18.33 882.2 -5.15996 850.74 42.16C811.61 101.02 778.66 246.53 814.38 349.02C818.848 362.234 826.972 373.909 837.81 382.69C863.3 402.92 892.91 398.69 915.27 389.01C926.437 384.1 936.721 377.387 945.71 369.14C983.44 334.91 974.71 332.43 1010.29 241.61C1035.08 191.72 1096.08 177.39 1132.08 216.89C1138.01 223.488 1142.66 231.141 1145.77 239.45C1163.45 285.45 1152.58 319.45 1138.96 347.34C1126.96 371.96 1104.4 390.06 1077.51 395.25C1054.45 399.7 1029.14 394.9 1011.03 370.98C1005.27 363.228 1000.97 354.483 998.37 345.18C983.62 294.18 1002.51 256.42 1009.37 243.77C1015.55 232.38 1046.63 174.16 1112.79 201.53C1168.5 224.58 1213.45 178.22 1213.45 178.22";
-const varianets: Variants = {
-  draw: {
-    pathLength: 0,
 
-    transition: {
-      duration: 1.5,
-      ease: [0.317, 0.803, 0.698, -0.024],
-    },
-  },
-  scaleUp: {
-    width: "1000%",
-    height: "1000%",
-
-    transition: {
-      delay: 0.6,
-      duration: 1.5,
-      ease: [0.317, 0.803, 0.698, -0.024],
-    },
-  },
-};
-
-const containerVariants = {
-  animate: {
-    transition: {
-      staggerChildren: 1.4, // delay between word groups
-    },
-  },
-};
-
-const wordGroupVariants: Variants = {
-  initial: { opacity: 0, scale: 1, y: 40 },
-  animate: (i: number) => ({
-    opacity: 1,
-    y: 200,
-    scale: 1,
-
-    transition: {
-      delay: i * 1.4,
-      duration: 0.3,
-      ease: "easeOut",
-    },
-  }),
-  exit: (i: number) => ({
-    opacity: 0.5,
-    scale: 0.8,
-    y: -40,
-    transition: {
-      delay: i * 1.4 + 1.2,
-      duration: 0.5,
-      ease: "easeInOut",
-    },
-  }),
-};
-
-const pathVariants: Variants = {
-  initial: { pathLength: 0 },
-  animate: {
-    pathLength: 1,
-    transition: {
-      duration: 1.2,
-      ease: [0.42, 0, 0.58, 1], // replaces "easeInOut"
-    },
-  },
-};
 export const slideUp: Variants = {
   initial: {
     y: 300,
   },
   enter: {
     y: 0,
-    transition: { duration: 0.9, ease: [0.33, 1, 0.68, 1], delay: 2 },
+    transition: {
+      duration: 0.9,
+      ease: [0.33, 1, 0.68, 1],
+      delay: 2,
+    },
   },
 };
-export default function LandingPageClient() {
-  const controls = useAnimation();
-  const dotControls = useAnimation();
-  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-
-  useEffect(() => {
-    // Only run on client
-    if (typeof window !== "undefined") {
-      setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-    }
-
-    async function sequence() {
-      await controls.start("draw");
-      await controls.start("scaleUp");
-
-      controls.start("expandSquare");
-    }
-
-    sequence();
-  }, []);
-
+export default function LandingPageClient({
+  startAnimation,
+}: {
+  startAnimation: boolean;
+}) {
   return (
     <>
       <motion.div
         variants={slideUp}
         initial="initial"
-        animate="enter"
+        animate={startAnimation ? "enter" : "initial"} // only run when ready
         className="bg-m-background flex h-screen flex-col items-center justify-center gap-20 overflow-hidden"
       >
-        <h1
-          className={cn(
-            "overflow-hidden",
-            "font-kabel",
-            "flex flex-col items-center justify-center",
-            "text-xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-7xl 2xl:text-8xl",
-            "gap-2 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10",
-          )}
-        >
-          <div className="flex w-full items-center justify-start gap-2 sm:gap-4 lg:gap-6">
-            <span className="text-m-text flex items-center justify-center">
-              Code
-            </span>
-            <span className="text-m-text/20 flex items-center justify-center">
-              in
-            </span>
-            <span className="text-m-text/20 flex items-center justify-center">
-              rhythm
-            </span>
-          </div>
-
-          <div
-            className={cn(
-              "flex w-full items-center justify-center gap-2",
-              "ml-[97px] sm:ml-[177px] sm:gap-4 md:ml-[177px] lg:ml-[240px] lg:gap-6 xl:ml-[338px] 2xl:ml-[435px]",
-            )}
-          >
-            <span className="text-m-text col-start-3 row-start-2 flex items-center justify-center sm:leading-14 xl:leading-32">
-              Design
-            </span>
-            <span className="text-m-text/20 col-start-4 row-start-2 flex items-center justify-center">
-              within
-            </span>
-            <span className="text-m-text/20 col-start-5 row-start-2 flex items-center justify-center">
-              harmony
-            </span>
-          </div>
-        </h1>
-        <h2 className="text-m-foreground/40 font-iransans w-2xs text-center text-sm font-light md:text-base">
-          My Goal is to Solve Problems at the intersection of business and
-          technology
-        </h2>
+        <AnimatedHeading />
+        <SubHeading />
       </motion.div>
-      <div className="fixed bottom-10 flex w-full items-center justify-center">
-        <div className="flex max-w-md items-center justify-between gap-14 rounded-3xl p-5 backdrop-blur-xl">
-          <div className="relative flex h-[40px] w-56 items-center justify-between gap-2 px-3">
-            <div className="via-m-secondary absolute -top-2 left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-            <div className="flex h-[40px] items-center justify-center gap-2">
-              <div className="bg-m-secondary h-11/12 w-[0.5px] rounded-full" />
-              <div className="bg-m-secondary h-11/12 w-[0.5px]" />
-              <div className="bg-m-secondary h-11/12 w-[0.5px]" />
-            </div>
-            <div className="flex h-[40px] items-center justify-center gap-2">
-              <div className="bg-m-secondary h-11/12 w-[0.5px] rounded-full" />
-            </div>
-
-            <div className="via-m-secondary absolute -bottom-2 left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-          </div>
-          <div className="flex w-full items-center justify-center">
-            <motion.svg viewBox="0 0 99 105" className={"size-[100px]"}>
-              <motion.path
-                className="fill-m-text"
-                d={aliPath}
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{
-                  duration: 1.1,
-                  ease: [0.317, 0.803, 0.698, -0.024],
-                }}
-              />
-            </motion.svg>
-          </div>
-          <div className="justify-st flex w-full items-center">
-            <Volume2Icon className="text-m-primary size-10 rounded-full p-2 bg-blend-screen" />
-          </div>
-        </div>
-      </div>
-      <div className="h-screen bg-red-400"></div>
+      <BottomWidget />
+      <div className="bg-m-light h-screen"></div>
+      <div className="bg-m-dark h-screen"></div>
+      <div className="bg-m-text h-screen"></div>
     </>
   );
 }

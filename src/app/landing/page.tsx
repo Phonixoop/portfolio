@@ -9,41 +9,22 @@ export default function LandingPage() {
   useEffect(() => {
     (async () => {
       const LocomotiveScroll = (await import("locomotive-scroll")).default;
-      const locomotiveScroll = new LocomotiveScroll();
+      const scroll = new LocomotiveScroll();
 
       setTimeout(() => {
         setIsLoading(false);
         document.body.style.cursor = "default";
-        window.scrollTo(0, 0);
+        scroll.scrollTo(0, { duration: 0, lerp: 0 });
       }, 1700);
     })();
   }, []);
 
-  const [dimension, setDimension] = useState({ width: 0, height: 0 });
-
-  useEffect(() => {
-    setDimension({ width: window.innerWidth, height: window.innerHeight });
-  }, []);
-  if (dimension.width <= 0) return;
-  const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${dimension.width / 2} ${dimension.height + 300} 0 ${dimension.height}  L0 0`;
   return (
-    <>
-      {/* <span className="z-40 flex items-center justify-center bg-red-500 p-5 text-white">
-        {JSON.stringify(dimension)} asdsad
-      </span>
-      {initialPath}
-      <svg
-        width={1080}
-        height={1920}
-        style={{ height: "calc(100%)" }}
-        className="top-0 z-0 w-full"
-      >
-        <path d={initialPath} className="fill-red-400" />
-      </svg> */}
+    <main className="h-screen">
       <AnimatePresence mode="wait">
         {isLoading && <Preloader />}
       </AnimatePresence>
-      <LandingPageClient />
-    </>
+      <LandingPageClient startAnimation={true} />
+    </main>
   );
 }
