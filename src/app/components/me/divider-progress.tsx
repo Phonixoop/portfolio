@@ -14,7 +14,7 @@ export default function DividerProgress({
   _index,
   length,
   padding = 15,
-  gap = 2,
+  gap = 0,
 }: {
   _index?: MotionValue;
   length: number;
@@ -110,15 +110,15 @@ export default function DividerProgress({
       <div
         ref={containerRef}
         className={cn(
-          `liquid-filter relative flex h-full w-60 items-center select-none`,
+          `liquid-filter relative flex h-11 w-28 items-center select-none`,
           isDragging ? "cursor-grabbing" : "cursor-grab",
         )}
       >
-        <div className="via-m-secondary/50 absolute top-[40%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-secondary/50 absolute top-[45%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-secondary/50 absolute top-[50%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-secondary/50 absolute bottom-[45%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-secondary/50 absolute bottom-[40%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-secondary/50 absolute top-[28%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-secondary/50 absolute top-[38%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-secondary/50 absolute top-[48%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-secondary/50 absolute bottom-[38%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-secondary/50 absolute bottom-[28%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
 
         {Array.from({ length }).map((_, k) => {
           const xPos = useTransform(
@@ -179,7 +179,7 @@ export default function DividerProgress({
       <svg className="hidden">
         <defs>
           <filter id="liquid">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
             <feColorMatrix
               in="name"
               mode="matrix"

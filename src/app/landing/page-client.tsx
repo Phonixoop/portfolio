@@ -22,6 +22,7 @@ import BottomWidget from "~/app/landing/bottom-widget";
 import AnimatedHeading from "~/app/landing/heading";
 import { ali, hello, i, s, my, name } from "~/app/landing/paths";
 import SubHeading from "~/app/landing/sub-heading";
+import TopWidget from "~/app/landing/top-widget";
 import { aliPath } from "~/app/ui/svgs/ali";
 import { cn } from "~/lib/utils";
 
@@ -51,6 +52,7 @@ export default function LandingPageClient({
 }) {
   return (
     <>
+      <TopWidget />
       <motion.div
         variants={slideUp}
         initial="initial"
