@@ -17,6 +17,7 @@ interface SvgMorphProps {
   yoyo?: boolean;
   easing?: string;
   className?: string;
+  svgClassName?: string;
 }
 
 const SvgMorphGsap: React.FC<SvgMorphProps> = ({
@@ -26,6 +27,7 @@ const SvgMorphGsap: React.FC<SvgMorphProps> = ({
   height = 1080,
   stroke = "white",
   className,
+  svgClassName,
   strokeWidth = 2,
   duration = 3,
   repeat = 0,
@@ -51,7 +53,7 @@ const SvgMorphGsap: React.FC<SvgMorphProps> = ({
   }, [morphPath, duration, repeat, yoyo, easing]);
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`}>
+    <svg viewBox={`0 0 ${width} ${height}`} className={svgClassName}>
       <path
         ref={pathRef}
         fill="none"

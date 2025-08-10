@@ -5,6 +5,8 @@ import { Geist } from "next/font/google";
 
 import Header from "~/app/header";
 import Provider from "~/app/provider";
+import Preloader from "~/app/components/me/preloader";
+import UniversalPreloader from "~/app/components/me/preloader/universal";
 
 export const metadata: Metadata = {
   title: "Ali H.",

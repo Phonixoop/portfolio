@@ -10,9 +10,10 @@ export default function TopWidget() {
         initial={{ width: "45px", opacity: 0 }}
         animate={{ width: "130px", opacity: 1 }}
         transition={{
-          delay: 2.5,
+          delay: 4,
           duration: 1.2,
-          ease: [1, 1.015, 0.68, -0.782],
+          ease: "easeInOut",
+          // ease: [1, 1.015, 0.68, -0.782],
         }}
         style={{
           transformOrigin: "center",

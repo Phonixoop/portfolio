@@ -38,7 +38,7 @@ export default function Preloader() {
     },
     exit: {
       d: targetPath,
-      transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.3 },
+      transition: { duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.3 },
     },
   };
 
@@ -48,7 +48,7 @@ export default function Preloader() {
       initial="initial"
       exit="exit"
       className={
-        "bg-m-background fixed z-[99] flex h-screen w-screen items-center justify-center"
+        "bg-m-dark fixed z-[99] flex h-screen w-screen items-center justify-center"
       }
     >
       {dimension.height > 0 && (
@@ -69,7 +69,7 @@ export default function Preloader() {
             {!showMorph ? (
               <motion.svg
                 viewBox="0 0 1920 1080"
-                className="w-screen"
+                className="w-6/12"
                 // onAnimationComplete={() => setShowMorph(true)}
               >
                 <motion.path
@@ -89,6 +89,7 @@ export default function Preloader() {
                 morphPath={"M1865 43H54V1037H1865V43Z"}
                 width={1920}
                 height={1080}
+                svgClassName="w-6/12"
                 className="stroke-m-text fill-none stroke-[25px]"
                 duration={1.3}
                 repeat={0}

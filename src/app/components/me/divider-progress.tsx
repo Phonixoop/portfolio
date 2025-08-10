@@ -6,9 +6,22 @@ import {
   MotionValue,
   useMotionValueEvent,
   useScroll,
+  type Variants,
+  stagger,
 } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "~/lib/utils";
+
+// const defaultAnimation: Variants = {
+//   hidden: { x: "200%" },
+//   animate: {
+//     x: "0%",
+//     transition: {
+//       duration: 0.5,
+//       ease: "easeInOut",
+//     },
+//   },
+// };
 
 export default function DividerProgress({
   _index,
@@ -23,7 +36,7 @@ export default function DividerProgress({
 }) {
   const { scrollYProgress } = useScroll({});
   const sY = useTransform(() => scrollYProgress.get() * 100);
-  const index = useTransform(sY, [0, 100], [1, 4]);
+  const index = useTransform(sY, [0, 100], [1, length]);
   const progress = useMotionValue(0);
   const trigger = useMotionValue(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -107,7 +120,7 @@ export default function DividerProgress({
 
   return (
     <>
-      <div
+      <motion.div
         ref={containerRef}
         className={cn(
           `liquid-filter relative flex h-11 w-28 items-center select-none`,
@@ -157,6 +170,8 @@ export default function DividerProgress({
             // circle
             <motion.div
               key={k}
+              // variants={defaultAnimation}
+
               className="border-m-secondary text-m-background absolute top-1/2 left-0 flex size-6 -translate-1/2 flex-wrap items-center justify-center rounded-full text-xs backdrop-blur-2xl"
               style={{ x: xPos, zIndex: length - k }}
             >
@@ -167,7 +182,7 @@ export default function DividerProgress({
               />
             ))} */}
               {/* Background layer with motion opacity */}
-              <motion.div
+              <motion.span
                 className="bg-m-secondary absolute inset-[0px] z-0 rounded-full opacity-100"
 
                 // style={{ opacity }}
@@ -175,7 +190,7 @@ export default function DividerProgress({
             </motion.div>
           );
         })}
-      </div>
+      </motion.div>
       <svg className="hidden">
         <defs>
           <filter id="liquid">
