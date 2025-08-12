@@ -17,7 +17,7 @@ export const slideUpWithY: Variants = {
 export const parentVariants: Variants = {
   open: {
     transition: {
-      delayChildren: 2, // wait before starting
+      delayChildren: 2.5, // wait before starting
       staggerChildren: 0.12, // gap between each word animation
     },
   },

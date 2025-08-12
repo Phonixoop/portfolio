@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 
@@ -28,13 +28,15 @@ const SvgMorphGsap: React.FC<SvgMorphProps> = ({
   stroke = "white",
   className,
   svgClassName,
-  strokeWidth = 2,
+  strokeWidth = 25,
   duration = 3,
   repeat = 0,
   yoyo = false,
   easing = "power1.inOut",
 }) => {
   const pathRef = useRef<SVGPathElement | null>(null);
+  const [preserveAspectRatio, setPreserveAspectRatio] =
+    useState("xMidYMid meet");
 
   useEffect(() => {
     if (!pathRef.current) return;
@@ -45,6 +47,12 @@ const SvgMorphGsap: React.FC<SvgMorphProps> = ({
       ease: easing,
       repeat,
       yoyo,
+      onComplete: () => {
+        // Only set preserveAspectRatio to 'none' if repeat is 0 (animation ends)
+        if (repeat === 0) {
+          //  setPreserveAspectRatio("none");
+        }
+      },
     });
 
     return () => {
@@ -53,14 +61,20 @@ const SvgMorphGsap: React.FC<SvgMorphProps> = ({
   }, [morphPath, duration, repeat, yoyo, easing]);
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} className={svgClassName}>
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      className={svgClassName}
+      preserveAspectRatio="none"
+    >
       <path
         ref={pathRef}
+        vectorEffect={"none-scalling-stroke"}
         fill="none"
         className={className}
-        stroke={stroke}
         strokeWidth={strokeWidth}
         d={initialPath}
+        strokeLinejoin="round"
+        strokeLinecap="round"
       />
     </svg>
   );

@@ -1,4 +1,4 @@
-import { useInView, motion, stagger, type Variants } from "motion/react";
+import { useInView, motion, stagger, type Variants, delay } from "motion/react";
 import { useRef } from "react";
 import { parentVariants, slideUpWithY } from "./anim";
 
@@ -15,7 +15,13 @@ const defaultAnimation: Variants = {
   },
 };
 
-export default function StaggerPhraseAnim({ text }: { text: string }) {
+export default function StaggerPhraseAnim({
+  text,
+  delay = 3,
+}: {
+  text: string;
+  delay?: number;
+}) {
   return (
     <motion.div
       initial="hidden"
@@ -23,7 +29,7 @@ export default function StaggerPhraseAnim({ text }: { text: string }) {
       viewport={{
         once: true,
       }}
-      transition={{ delayChildren: stagger(0.05, { startDelay: 3 }) }}
+      transition={{ delayChildren: stagger(0.05, { startDelay: delay }) }}
     >
       {text.split(" ").map((word, index) => {
         return (

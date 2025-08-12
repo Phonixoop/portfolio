@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import LandingPageClient from "./page-client";
 import { AnimatePresence } from "motion/react";
 import Preloader from "~/app/components/me/preloader";
 import { cn } from "~/lib/utils";
 import Preloader2 from "~/app/components/me/preloader/version2";
+import LandingPageClient from "~/app/landing/page-client";
 
 export default function LandingPage() {
   const [scrollReady, setScrollReady] = useState(false);
@@ -13,7 +13,7 @@ export default function LandingPage() {
 
   // Minimum animation time
   useEffect(() => {
-    const timer = setTimeout(() => setMinTimePassed(true), 1900); // 1.7s
+    const timer = setTimeout(() => setMinTimePassed(true), 1700); // 1.7s
     return () => clearTimeout(timer);
   }, []);
 
@@ -49,7 +49,7 @@ export default function LandingPage() {
   return (
     <main className={cn(showPreloader ? "overflow-hidden" : "")}>
       <AnimatePresence mode="wait">
-        {showPreloader && <Preloader />}
+        {showPreloader && <Preloader2 />}
       </AnimatePresence>
 
       {/* Keep content hidden until preloader finishes */}

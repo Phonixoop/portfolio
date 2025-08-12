@@ -127,11 +127,11 @@ export default function DividerProgress({
           isDragging ? "cursor-grabbing" : "cursor-grab",
         )}
       >
-        <div className="via-m-secondary/50 absolute top-[28%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-secondary/50 absolute top-[38%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-secondary/50 absolute top-[48%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-secondary/50 absolute bottom-[38%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-secondary/50 absolute bottom-[28%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-primary/50 absolute top-[28%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-primary/50 absolute top-[38%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-primary/50 absolute top-[48%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-primary/50 absolute bottom-[38%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        <div className="via-m-primary/50 absolute bottom-[28%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
 
         {Array.from({ length }).map((_, k) => {
           const xPos = useTransform(
@@ -172,7 +172,7 @@ export default function DividerProgress({
               key={k}
               // variants={defaultAnimation}
 
-              className="border-m-secondary text-m-background absolute top-1/2 left-0 flex size-6 -translate-1/2 flex-wrap items-center justify-center rounded-full text-xs backdrop-blur-2xl"
+              className="border-m-primary text-m-background absolute top-1/2 left-0 flex size-6 -translate-1/2 flex-wrap items-center justify-center rounded-full text-xs backdrop-blur-2xl"
               style={{ x: xPos, zIndex: length - k }}
             >
               {/* {Array.from({ length: length - k }).map((_, i) => (
@@ -183,7 +183,7 @@ export default function DividerProgress({
             ))} */}
               {/* Background layer with motion opacity */}
               <motion.span
-                className="bg-m-secondary absolute inset-[0px] z-0 rounded-full opacity-100"
+                className="bg-m-primary absolute inset-[0px] z-0 rounded-full opacity-100"
 
                 // style={{ opacity }}
               />
