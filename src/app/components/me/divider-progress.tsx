@@ -8,8 +8,11 @@ import {
   useScroll,
   type Variants,
   stagger,
+  useSpring,
 } from "motion/react";
-import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import React, { useEffect, useRef, useState, type ReactElement } from "react";
+import { Fade } from "~/app/components/me/animation/fade";
 import { cn } from "~/lib/utils";
 
 // const defaultAnimation: Variants = {
@@ -23,31 +26,48 @@ import { cn } from "~/lib/utils";
 //   },
 // };
 
-export default function DividerProgress({
-  _index,
-  length,
-  padding = 10,
-  gap = 5,
-}: {
+type Item = {
+  text: string | ReactElement;
+  link: string;
+  isIcon?: boolean;
+};
+
+type Props = {
   _index?: MotionValue;
-  length: number;
+
   padding?: number;
   gap?: number;
-}) {
+  hovered?: boolean;
+  items: Item[];
+};
+export default function DividerProgress({
+  _index,
+  padding = 20,
+  gap = 5,
+  hovered = false,
+  items = [],
+}: Props) {
+  const length = items.length;
   const { scrollYProgress } = useScroll({});
   const sY = useTransform(() => scrollYProgress.get() * 100);
-  const index = useTransform(sY, [0, 100], [1, length]);
+  const index = useTransform(sY, [5, 100], [1, length]);
   const progress = useMotionValue(0);
   const trigger = useMotionValue(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLUListElement>(null);
   const widthRef = useRef(0);
 
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    return index.onChange((latest) => {
+    if (!index) return;
+
+    // Subscribe to changes
+    const unsubscribe = index.on("change", (latest: number) => {
       animate(progress, latest);
     });
+
+    // Clean up subscription on unmount
+    return () => unsubscribe();
   }, [index, progress]);
 
   useEffect(() => {
@@ -72,7 +92,7 @@ export default function DividerProgress({
     if (!el) return;
 
     const handleStart = () => {
-      setIsDragging(true);
+      //setIsDragging(true);
     };
 
     const handleMove = (clientX: number) => {
@@ -120,20 +140,31 @@ export default function DividerProgress({
 
   return (
     <>
-      <motion.div
+      <motion.ul
         ref={containerRef}
+        // animate={
+        //   hovered
+        //     ? {
+        //         transform: `rotateX(-80deg) translateZ(-60px)`,
+        //         opacity: 0,
+        //         transition: {
+        //           duration: 0.5,
+        //         },
+        //       }
+        //     : {
+        //         transform: `rotateX(0) translateZ(0)`,
+        //         opacity: 1,
+        //       }
+        // }
         className={cn(
-          `liquid-filter relative flex h-11 w-28 items-center select-none`,
-          isDragging ? "cursor-grabbing" : "cursor-grab",
-        )}
-      >
-        <div className="via-m-primary/50 absolute top-[28%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-primary/50 absolute top-[38%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-primary/50 absolute top-[48%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-primary/50 absolute bottom-[38%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
-        <div className="via-m-primary/50 absolute bottom-[28%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+          `liquid-filter relative h-full w-full items-center select-none`,
+          // isDragging ? "cursor-grabbing" : "cursor-grab",
 
-        {Array.from({ length }).map((_, k) => {
+          "flex flex-row items-center justify-center gap-[4px] p-1",
+        )}
+        layout
+      >
+        {items.map((item, k) => {
           const xPos = useTransform(
             [progress, trigger],
             ([val, _t]: number[]) => {
@@ -145,7 +176,7 @@ export default function DividerProgress({
               const endMove = moveStep;
 
               const leftPos = padding + k * gap;
-              const rightPos = width - padding - (length - k) * gap;
+              const rightPos = width - padding - (length - k - 1) * gap;
 
               const safeVal = val ?? 0;
               if (safeVal <= startMove) return leftPos;
@@ -155,25 +186,30 @@ export default function DividerProgress({
               return leftPos + frac * (rightPos - leftPos);
             },
           );
-          // Calculate fade steps:
-          // const moveStep = length - k;
-          // const startMove = moveStep - 1;
-          // const endMove = moveStep;
-
-          // const opacity = useTransform(progress, (val) => {
-          //   if (val <= startMove) return 0;
-          //   if (val >= endMove) return 1;
-          //   return (val - startMove) / (endMove - startMove);
-          // });
 
           return (
             // circle
-            <motion.div
+            <motion.li
+              layout
               key={k}
               // variants={defaultAnimation}
 
-              className="border-m-primary text-m-background absolute top-1/2 left-0 flex size-6 -translate-1/2 flex-wrap items-center justify-center rounded-full text-xs backdrop-blur-2xl"
-              style={{ x: xPos, zIndex: length - k }}
+              className={cn(
+                "flex flex-wrap items-center justify-center text-xs",
+
+                // "absolute top-1/2 left-0 size-6 -translate-1/2 rounded-full",
+                hovered
+                  ? "text-m-text-sub bg-m-text relative min-w-40 rounded-full p-2"
+                  : "text-m-text-sub bg-m-text absolute top-1/2 left-0 size-6 -translate-1/2 rounded-full",
+
+                hovered && item?.isIcon && "size-11 min-w-12",
+              )}
+              style={{
+                ...(!hovered && { x: xPos }),
+                position: hovered ? "relative" : "absolute",
+                zIndex: length - k,
+                transformOrigin: "center",
+              }}
             >
               {/* {Array.from({ length: length - k }).map((_, i) => (
               <span
@@ -182,15 +218,77 @@ export default function DividerProgress({
               />
             ))} */}
               {/* Background layer with motion opacity */}
-              <motion.span
-                className="bg-m-primary absolute inset-[0px] z-0 rounded-full opacity-100"
+              {/* <motion.span
+                className={cn(
+                  "bg-m-text absolute inset-[0px] z-0 rounded-full opacity-100",
+                  hovered ? "rounded-xl" : "rounded-full",
+                )}
 
                 // style={{ opacity }}
-              />
-            </motion.div>
+              /> */}
+              {hovered && (
+                <Link
+                  href={hovered ? item.link : "#"}
+                  className={cn(
+                    hovered ? "flex" : "hidden",
+                    "h-full w-full items-center justify-center text-xl",
+                  )}
+                >
+                  {item.text}
+                  {/* <Fade
+                    fade="in"
+                    to="ToLeft"
+                    options={{
+                      duration: 0.2,
+                    }}
+                  >
+                  </Fade> */}
+                </Link>
+              )}
+            </motion.li>
           );
         })}
-      </motion.div>
+
+        <motion.div
+          initial={{
+            width: "90%",
+            height: "44px",
+          }}
+          animate={
+            hovered
+              ? {
+                  width: "100%",
+                  height: "100%",
+                }
+              : {
+                  width: "90%",
+                  height: "20px",
+                }
+          }
+          className="absolute top-1/2 left-1/2 flex -translate-1/2"
+        >
+          <motion.div className="via-m-text/50 absolute top-[0%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+          <motion.div
+            className={cn(
+              "via-m-text/50 absolute top-[25%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent",
+              hovered ? "hidden" : "block",
+            )}
+          />
+          <motion.div
+            className={cn(
+              "via-m-text/50 absolute top-[48%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent",
+              hovered ? "hidden" : "block",
+            )}
+          />
+          <motion.div
+            className={cn(
+              "via-m-text/50 absolute bottom-[25%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent",
+              hovered ? "hidden" : "block",
+            )}
+          />
+          <motion.div className="via-m-text/50 absolute bottom-[0%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
+        </motion.div>
+      </motion.ul>
       <svg className="hidden">
         <defs>
           <filter id="liquid">

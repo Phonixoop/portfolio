@@ -21,10 +21,10 @@ import { cn } from "~/lib/utils";
 import { TextAnimate } from "~/app/components/magicui/text-animate";
 import { HyperText } from "~/app/components/magicui/hyper-text";
 import { HyperText2 } from "~/app/components/magicui/hyper-text-2";
-import StaggerContainer from "~/app/motion/stagger-container";
 import { projects } from "~/app/projects";
-import { MotionEl } from "~/app/motion/motion-element";
+import { MotionEl } from "~/app/components/motion/motion-element";
 import MagneticGsap from "~/app/components/me/magnet-gsap";
+import StaggerContainer from "~/app/components/motion/stagger-container";
 
 const skills = [
   {

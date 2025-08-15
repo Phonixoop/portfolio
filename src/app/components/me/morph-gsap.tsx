@@ -66,12 +66,23 @@ const SvgMorphGsap: React.FC<SvgMorphProps> = ({
       className={svgClassName}
       preserveAspectRatio="none"
     >
+      <linearGradient
+        id="paint0_linear_382_287"
+        x1="3"
+        y1="4"
+        x2="1786.5"
+        y2="4"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopOpacity="0" />
+        <stop offset="0.5" className="[stop-color:var(--color-m-text)]" />
+        <stop offset="1" stopOpacity="0" />
+      </linearGradient>
       <path
+        stroke="url(#paint0_linear_382_287)"
         ref={pathRef}
         vectorEffect={"none-scalling-stroke"}
-        fill="none"
         className={className}
-        strokeWidth={strokeWidth}
         d={initialPath}
         strokeLinejoin="round"
         strokeLinecap="round"

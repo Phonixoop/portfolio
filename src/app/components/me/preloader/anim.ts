@@ -22,10 +22,16 @@ export const slideUp: Variants = {
 
 export const slideUpV2: Variants = {
   initial: {
-    top: 0,
+    top: "-50vh",
   },
+
   exit: {
-    top: "-100vh",
-    transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1], delay: 0.5 },
+    top: ["-50vh", "0vh", "-100vh"],
+    transition: {
+      duration: 1.2, // total duration
+      times: [0, 0.4, 1], // 0 → 0.4 for first part, 0.4 → 1 for second part
+      ease: [0.76, 0, 0.24, 1],
+      delay: 0.5,
+    },
   },
 };

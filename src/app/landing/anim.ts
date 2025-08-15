@@ -14,10 +14,10 @@ export const slideUpWithY: Variants = {
   },
 };
 
-export const parentVariants: Variants = {
+export const parentVariants = (delay: number = 0): Variants => ({
   open: {
     transition: {
-      delayChildren: 2.5, // wait before starting
+      delayChildren: delay, // dynamic delay from outside
       staggerChildren: 0.12, // gap between each word animation
     },
   },
@@ -27,4 +27,4 @@ export const parentVariants: Variants = {
       staggerDirection: -1, // reverse when closing
     },
   },
-};
+});

@@ -60,7 +60,7 @@ export const fadeInUp: Variants = {
   },
 };
 
-export default function LandingPageClient({
+export default function HeroSection({
   startAnimation = true,
 }: {
   startAnimation?: boolean;
@@ -74,7 +74,6 @@ export default function LandingPageClient({
   const audioWaveContainerRef = useRef<any>(null);
   return (
     <>
-      <TopWidget />
       <motion.div
         variants={slideUpInternal}
         initial="initial"
@@ -107,46 +106,4 @@ export default function LandingPageClient({
       </div> */}
     </>
   );
-}
-
-/*  {" "}
-      <Image
-        src={"/bg-linear.png"}
-        width={1920}
-        height={1080}
-        className="h-screen w-auto object-fill"
-        quality={100}
-        alt="bg image"
-      />{" "}
-      <Image
-        src={"/bg-linear.png"}
-        width={1920}
-        height={1080}
-        className="h-screen w-auto object-fill"
-        quality={100}
-        alt="bg image"
-      />*/
-
-{
-  /* <h1 className="font-kabel font-res grid grid-cols-5 grid-rows-2 items-center justify-center leading-32">
-        <span className="text-m-text flex items-center justify-center">
-          Code
-        </span>
-        <span className="text-m-text/20 flex items-center justify-center">
-          in
-        </span>
-        <span className="text-m-text/20 flex items-center justify-center">
-          rhythm
-        </span>
-
-        <span className="text-m-text col-start-3 row-start-2 flex items-center justify-center">
-          Design
-        </span>
-        <span className="text-m-text/20 col-start-4 row-start-2 flex items-center justify-center">
-          within
-        </span>
-        <span className="text-m-text/20 col-start-5 row-start-2 flex items-center justify-center">
-          harmony
-        </span>
-      </h1> */
 }

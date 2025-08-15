@@ -4,18 +4,15 @@ import { motion, type MotionProps, type Variants } from "motion/react";
 import {
   forwardRef,
   type ComponentPropsWithoutRef,
-  type ComponentPropsWithRef,
   type ElementType,
   type ForwardedRef,
-  type HTMLAttributes,
   type ReactElement,
-  type ReactNode,
-  type Ref,
 } from "react";
 
 // Animation options
 type FadeOption = "in" | "out";
 type SlideDirection = "top" | "bottom" | "left" | "right";
+type TriggerOption = "always" | "onView" | "onViewOnce";
 
 type MotionElProps<T extends ElementType> = {
   as?: T;
@@ -24,6 +21,7 @@ type MotionElProps<T extends ElementType> = {
   slideFrom?: SlideDirection;
   duration?: number;
   distance?: number;
+  trigger?: TriggerOption;
 } & MotionProps &
   Omit<ComponentPropsWithoutRef<T>, keyof MotionProps | "as" | "ref">;
 
@@ -81,6 +79,7 @@ export const MotionEl = forwardRef(
       slideFrom,
       duration = 0.5,
       distance = 5,
+      trigger = "always",
       ...props
     }: MotionElProps<T>,
     ref: ForwardedRef<any>,
@@ -94,7 +93,25 @@ export const MotionEl = forwardRef(
       distance,
     });
 
-    return <MotionComponent ref={ref} variants={variants} {...props} />;
+    // Default animation control props
+    let motionProps: MotionProps = {
+      variants,
+    };
+
+    if (trigger === "always") {
+      motionProps.initial = "hidden";
+      motionProps.animate = "visible";
+    } else if (trigger === "onView") {
+      motionProps.initial = "hidden";
+      motionProps.whileInView = "visible";
+      motionProps.viewport = { once: false, amount: 0.3 };
+    } else if (trigger === "onViewOnce") {
+      motionProps.initial = "hidden";
+      motionProps.whileInView = "visible";
+      motionProps.viewport = { once: true, amount: 0.3 };
+    }
+
+    return <MotionComponent ref={ref} {...motionProps} {...props} />;
   },
 ) as <T extends ElementType = "div">(
   props: MotionElProps<T> & { ref?: ForwardedRef<any> },

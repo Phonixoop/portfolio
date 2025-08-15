@@ -7,6 +7,7 @@ import Header from "~/app/header";
 import Provider from "~/app/provider";
 import Preloader from "~/app/components/me/preloader";
 import UniversalPreloader from "~/app/components/me/preloader/universal";
+import StickyCursor from "~/app/components/me/cursor";
 
 export const metadata: Metadata = {
   title: "Ali H.",
@@ -36,6 +37,7 @@ export default function RootLayout({
           <div className="noise-overlay">
             <div className="noise-overlay-child" />
           </div>
+          {/* <StickyCursor /> */}
         </Provider>
       </body>
     </html>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 
 interface HyperTextProps {
   children: string;
@@ -11,7 +12,8 @@ interface HyperTextProps {
   className?: string;
   style?: React.CSSProperties;
   characterSet?: string[];
-  by?: "char" | "word" | "line"; // <--- NEW
+  by?: "char" | "word" | "line";
+  trigger?: "always" | "onView" | "onViewOnce"; // NEW
 }
 
 const DEFAULT_CHARACTER_SET =
@@ -28,7 +30,8 @@ export function HyperText2({
   className,
   style,
   characterSet = DEFAULT_CHARACTER_SET,
-  by = "char", // <--- NEW
+  by = "char",
+  trigger = "always", // NEW
 }: HyperTextProps) {
   const [displayText, setDisplayText] = useState("");
   const currentIndex = useRef(0);
@@ -41,7 +44,7 @@ export function HyperText2({
   const units = (() => {
     switch (by) {
       case "word":
-        return targetText.split(/(\s+)/); // includes spaces as separate units
+        return targetText.split(/(\s+)/);
       case "line":
         return targetText.split(/\r?\n/).map((line) => line + "\n");
       case "char":
@@ -54,6 +57,20 @@ export function HyperText2({
   const stepDuration = duration
     ? Math.max(5, Math.floor(duration / totalSteps))
     : _stepDuration;
+
+  // inView detection
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, {
+    once: trigger === "onViewOnce",
+    amount: 0.3,
+  });
+
+  const shouldAnimate =
+    trigger === "always"
+      ? true
+      : trigger === "onView" || trigger === "onViewOnce"
+        ? inView
+        : false;
 
   const animate = () => {
     if (currentIndex.current >= units.length) {
@@ -85,6 +102,8 @@ export function HyperText2({
   };
 
   useEffect(() => {
+    if (!shouldAnimate) return;
+
     currentIndex.current = 0;
     scrambleCount.current = 0;
     setDisplayText("");
@@ -97,10 +116,10 @@ export function HyperText2({
       clearTimeout(timer);
       if (raf.current) clearTimeout(raf.current);
     };
-  }, [children, by]);
+  }, [children, by, shouldAnimate]);
 
   return (
-    <span className={className} style={style}>
+    <span ref={ref} className={className} style={style}>
       {displayText}
     </span>
   );

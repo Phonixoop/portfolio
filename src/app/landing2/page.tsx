@@ -5,6 +5,9 @@ import Preloader from "~/app/components/me/preloader";
 import { cn } from "~/lib/utils";
 import Preloader2 from "~/app/components/me/preloader/version2";
 import LandingPageClient from "~/app/landing/page-client";
+import HeroSection from "~/app/landing2/(sections)/hero";
+import ProjectsSection from "~/app/landing2/(sections)/2";
+import TopWidget from "~/app/landing/top-widget";
 
 export default function LandingPage() {
   const [scrollReady, setScrollReady] = useState(false);
@@ -47,7 +50,7 @@ export default function LandingPage() {
   const showPreloader = !(scrollReady && assetsLoaded && minTimePassed);
 
   return (
-    <main className={cn(showPreloader ? "overflow-hidden" : "")}>
+    <main className={cn(true ? "overflow-hidden" : "")}>
       <AnimatePresence mode="wait">
         {showPreloader && <Preloader2 />}
       </AnimatePresence>
@@ -60,8 +63,32 @@ export default function LandingPage() {
             : "opacity-100 transition-opacity duration-500"
         }
       >
-        <LandingPageClient startAnimation={!showPreloader} />
+        <TopWidget />
+        <HeroSection startAnimation={!showPreloader} />
+        <ProjectsSection />
+        {/* <LeftPanel /> */}
       </div>
     </main>
+  );
+}
+
+function LeftPanel() {
+  return (
+    <>
+      <div className="fixed top-0 left-0 z-50 flex h-screen flex-col items-center justify-center gap-4 px-5">
+        {[1, 2, 3, 4, 5].map((a) => {
+          return (
+            <>
+              <span
+                key={a}
+                className="bg-m-foreground text-m-background flex size-12 items-center justify-center rounded-full text-sm font-medium"
+              >
+                {a}
+              </span>
+            </>
+          );
+        })}
+      </div>
+    </>
   );
 }
