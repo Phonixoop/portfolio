@@ -39,7 +39,7 @@ export default function PageTest() {
         </motion.div>
         <div className="fixed top-5">
           {" "}
-          <DividerProgress length={4} />{" "}
+          {/* <DividerProgress length={4} />{" "} */}
         </div>
       </div>
       <div className="h-screen"></div>
