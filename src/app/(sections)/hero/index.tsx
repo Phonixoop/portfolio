@@ -43,20 +43,10 @@ export const slideUpInternal: Variants = {
     transition: {
       duration: 0.9,
       ease: [0.33, 1, 0.68, 1],
-      delay: 1.2,
+      delay: 1.15,
       when: "beforeChildren", // ⬅ important
       staggerChildren: 0.2, // optional: animates each child with a gap
     },
-  },
-};
-
-// Child variant
-export const fadeInUp: Variants = {
-  initial: { opacity: 0, y: 20 },
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
   },
 };
 
@@ -82,8 +72,8 @@ export default function HeroSection({
       >
         {/* <StaggerPhraseAnim text="Full Stack Developer" delay={4} /> */}
 
-        <AnimatedHeading delay={3} />
-        <SubHeading />
+        <AnimatedHeading delay={0} />
+        <SubHeading delay={1} />
       </motion.div>
       {/* <div className="bg-m-light mx-auto my-5 flex items-center justify-center rounded-3xl p-5">
         <AudioWave className="w-lg" />

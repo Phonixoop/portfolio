@@ -199,7 +199,7 @@ export default function DividerProgress({
 
                 // "absolute top-1/2 left-0 size-6 -translate-1/2 rounded-full",
                 hovered
-                  ? "text-m-text-sub bg-m-text relative min-w-40 rounded-full p-2"
+                  ? "text-m-background bg-m-text relative min-w-40 rounded-full p-2"
                   : "text-m-text-sub bg-m-text absolute top-1/2 left-0 size-6 -translate-1/2 rounded-full",
 
                 hovered && item?.isIcon && "size-11 min-w-12",

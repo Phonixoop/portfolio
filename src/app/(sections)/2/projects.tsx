@@ -59,7 +59,7 @@ export default function Projects() {
 
           <HyperText2
             trigger="onViewOnce"
-            className="text-m-text/70 inline-block font-light"
+            className="text-m-text/70 hidden font-light md:inline-block"
             duration={250}
             delay={250}
           >

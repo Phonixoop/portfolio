@@ -29,7 +29,7 @@ export default function RootLayout({
       lang="en"
       className={`${geist.variable} bg-m-background font-iransans relative`}
     >
-      <body className="bg-m-background hide-scrollbar-firefox relative">
+      <body className="bg-m-background relative">
         <Provider>
           {/* <Header /> */}
 

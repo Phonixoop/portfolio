@@ -18,7 +18,9 @@ const defaultAnimation: Variants = {
 export default function StaggerPhraseAnim({
   text,
   delay = 3,
+  className = "",
 }: {
+  className?: string;
   text: string;
   delay?: number;
 }) {
@@ -30,10 +32,11 @@ export default function StaggerPhraseAnim({
         once: true,
       }}
       transition={{ delayChildren: stagger(0.05, { startDelay: delay }) }}
+      className={className}
     >
       {text.split(" ").map((word, index) => {
         return (
-          <div
+          <span
             key={index}
             className={"relative inline-flex gap-2 overflow-hidden"}
           >
@@ -44,7 +47,7 @@ export default function StaggerPhraseAnim({
             >
               {word}
             </motion.span>
-          </div>
+          </span>
         );
       })}
     </motion.div>

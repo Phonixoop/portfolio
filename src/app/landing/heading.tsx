@@ -63,9 +63,9 @@ export default function AnimatedHeading({ delay = 0 }: { delay?: number }) {
         </motion.span>
         <motion.span
           variants={slideUpWithY}
-          className="text-m-secondary col-start-5 row-start-2 flex items-center justify-center"
+          className="text-m-primary col-start-5 row-start-2 flex items-center justify-center"
         >
-          Developer
+          Programmer
         </motion.span>
       </div>
     </motion.h1>

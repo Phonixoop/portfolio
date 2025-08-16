@@ -74,8 +74,20 @@ const SvgMorphGsap: React.FC<SvgMorphProps> = ({
         y2="4"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopOpacity="0" />
-        <stop offset="0.5" className="[stop-color:var(--color-m-text)]" />
+        <stop offset="0" stopOpacity="0" />
+        <stop
+          offset="5%"
+          stopOpacity="0"
+          className="[stop-color:var(--color-m-light)]"
+        />
+        <stop offset="0.3" className="[stop-color:var(--color-m-text)]" />{" "}
+        <stop offset="0.5" className="[stop-color:var(--color-m-text)]" />{" "}
+        <stop offset="0.7" className="[stop-color:var(--color-m-text)]" />{" "}
+        <stop
+          offset="95%"
+          stopOpacity="0"
+          className="[stop-color:var(--color-m-light)]"
+        />
         <stop offset="1" stopOpacity="0" />
       </linearGradient>
       <path

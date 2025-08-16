@@ -393,6 +393,35 @@
   }
 }
 
+.font-res {
+  font-size: clamp(3.5rem, 12vw + 1rem, 12rem);
+}
+
+.liquid-filter {
+  -webkit-filter: url(#liquid);
+  filter: url(#liquid);
+}
+
+/* ::-webkit-scrollbar {
+  display: none;
+} */
+
+/* Hide Scrollbar for Firefox & Internet Explorer & Edge */
+
+/* Make scrollbar less intrusive in Chrome: */
+
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-m-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-foregroundRGB), 0.2);
+}
 .hide-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
@@ -408,23 +437,4 @@
   &::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
-}
-
-.font-res {
-  font-size: clamp(3.5rem, 12vw + 1rem, 12rem);
-}
-
-.liquid-filter {
-  -webkit-filter: url(#liquid);
-  filter: url(#liquid);
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide Scrollbar for Firefox & Internet Explorer & Edge */
-.hide-scrollbar-firefox {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }

@@ -132,10 +132,28 @@ export default function Preloader2() {
                     y2="4"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stopOpacity="0" />
+                    <stop offset="0" stopOpacity="0" />
+                    <stop
+                      offset="5%"
+                      stopOpacity="0"
+                      className="[stop-color:var(--color-m-light)]"
+                    />
+                    <stop
+                      offset="0.3"
+                      className="[stop-color:var(--color-m-text)]"
+                    />{" "}
                     <stop
                       offset="0.5"
                       className="[stop-color:var(--color-m-text)]"
+                    />{" "}
+                    <stop
+                      offset="0.7"
+                      className="[stop-color:var(--color-m-text)]"
+                    />{" "}
+                    <stop
+                      offset="95%"
+                      stopOpacity="0"
+                      className="[stop-color:var(--color-m-light)]"
                     />
                     <stop offset="1" stopOpacity="0" />
                   </linearGradient>
@@ -161,7 +179,7 @@ export default function Preloader2() {
                   width={1920}
                   height={1080}
                   svgClassName="h-auto w-screen md:w-lg"
-                  className="fill-none stroke-[15px]"
+                  className="fill-none stroke-[5px]"
                   duration={0.3}
                   repeat={0}
                   yoyo={false}
