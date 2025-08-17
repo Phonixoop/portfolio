@@ -73,7 +73,7 @@ export default function LandingPage() {
             : "opacity-100 transition-opacity duration-500"
         }
       >
-        <div className="fixed top-10 right-5 z-50">
+        <div className="fixed right-5 bottom-5 z-50 blur-xs">
           <MorseBlinker text="Please Hire Me" />
         </div>
         <TopWidget />

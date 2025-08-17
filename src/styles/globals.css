@@ -5,66 +5,66 @@
 }
 @font-face {
   font-family: "IRANSansXFaNum";
-  src: url("/fonts/IRANSansXFaNum-Thin.woff") format("woff");
+  src: url("/fonts/iransanss/IRANSansXFaNum-Thin.woff") format("woff");
   font-weight: 100;
 }
 
 @font-face {
   font-family: "IRANSansXFaNum";
-  src: url("/fonts/IRANSansXFaNum-UltraLight.woff") format("woff");
+  src: url("/fonts/iransanss/IRANSansXFaNum-UltraLight.woff") format("woff");
   font-weight: 200;
 }
 
 @font-face {
   font-family: "IRANSansXFaNum";
-  src: url("/fonts/IRANSansXFaNum-Light.woff") format("woff");
+  src: url("/fonts/iransanss/IRANSansXFaNum-Light.woff") format("woff");
   font-weight: 300;
 }
 
 @font-face {
   font-family: "IRANSansXFaNum";
-  src: url("/fonts/IRANSansXFaNum-Regular.woff") format("woff");
+  src: url("/fonts/iransanss/IRANSansXFaNum-Regular.woff") format("woff");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "IRANSansXFaNum";
-  src: url("/fonts/IRANSansXFaNum-Medium.woff") format("woff");
+  src: url("/fonts/iransanss/IRANSansXFaNum-Medium.woff") format("woff");
   font-weight: 500;
 }
 
 @font-face {
   font-family: "IRANSansXFaNum";
-  src: url("/fonts/IRANSansXFaNum-DemiBold.woff") format("woff");
+  src: url("/fonts/iransanss/IRANSansXFaNum-DemiBold.woff") format("woff");
   font-weight: 600;
 }
 
 @font-face {
   font-family: "IRANSansXFaNum";
-  src: url("/fonts/IRANSansXFaNum-Bold.woff") format("woff");
+  src: url("/fonts/iransanss/IRANSansXFaNum-Bold.woff") format("woff");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "IRANSansXFaNum";
-  src: url("/fonts/IRANSansXFaNum-ExtraBold.woff") format("woff");
+  src: url("/fonts/iransanss/IRANSansXFaNum-ExtraBold.woff") format("woff");
   font-weight: 800;
 }
 
 @font-face {
   font-family: "IRANSansXFaNum";
-  src: url("/fonts/IRANSansXFaNum-Black.woff") format("woff");
+  src: url("/fonts/iransanss/IRANSansXFaNum-Black.woff") format("woff");
   font-weight: 900;
 }
 @font-face {
-  font-family: "kabel";
-  src: url("/kabel/kabel.ttf") format("ttf");
+  font-family: kabel;
+  src: url("/fonts/kabel/kabel.ttf") format("ttf");
 }
 
 @theme {
   --font-iransans: "Iransans", ui-sans-serif, system-ui, sans-serif;
-  --font-kabel: "kabel", ui-sans-serif, system-ui, sans-serif;
-
+  --font-kabel: "oswald", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Oswald", sans-serif;
   --radius-me-radius-card: 35px;
 
   --color-foregroundRGB: 10, 10, 10;
@@ -89,6 +89,10 @@
 
 @layer base {
   [data-theme="dark"] {
+    --font-iransans: "Iransans", ui-sans-serif, system-ui, sans-serif;
+    --font-kabel: "kabel", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Oswald", sans-serif;
+
     --color-foregroundRGB: 248, 248, 248;
     --color-back: 0, 0, 0;
     --color-m-background: oklch(14.479% 0.00002 271.152);

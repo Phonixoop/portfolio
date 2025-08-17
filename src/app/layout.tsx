@@ -3,11 +3,9 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
-import Header from "~/app/header";
 import Provider from "~/app/provider";
-import Preloader from "~/app/components/me/preloader";
-import UniversalPreloader from "~/app/components/me/preloader/universal";
-import StickyCursor from "~/app/components/me/cursor";
+
+import localFont from "next/font/local";
 
 export const metadata: Metadata = {
   title: "Ali H.",
@@ -15,9 +13,68 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
+const iranSans = localFont({
+  src: [
+    {
+      path: "../../public/fonts/iransans/IRANSansXFaNum-Thin.woff",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/iransans/IRANSansXFaNum-UltraLight.woff",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/iransans/IRANSansXFaNum-Light.woff",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/iransans/IRANSansXFaNum-Regular.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/iransans/IRANSansXFaNum-Medium.woff",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/iransans/IRANSansXFaNum-DemiBold.woff",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/iransans/IRANSansXFaNum-Bold.woff",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/iransans/IRANSansXFaNum-ExtraBold.woff",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/iransans/IRANSansXFaNum-Black.woff",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-iransans",
+  display: "swap",
+});
+
+const kabel = localFont({
+  src: [
+    {
+      path: "../../public/fonts/kabel/kabel.ttf",
+      weight: "100",
+      style: "normal",
+    },
+  ],
+  variable: "--font-kabel",
+  display: "swap",
 });
 
 export default function RootLayout({
@@ -27,7 +84,7 @@ export default function RootLayout({
     <html
       suppressHydrationWarning
       lang="en"
-      className={`${geist.variable} bg-m-background font-iransans relative`}
+      className={`bg-m-background font-iransans relative`}
     >
       <body className="bg-m-background relative">
         <Provider>

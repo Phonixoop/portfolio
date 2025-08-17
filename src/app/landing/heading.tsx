@@ -2,6 +2,7 @@ import { cn } from "~/lib/utils"; // your className utility
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { parentVariants, slideUpWithY } from "./anim";
+import StackSvg from "~/app/ui/svgs/stack";
 
 export default function AnimatedHeading({ delay = 0 }: { delay?: number }) {
   const headingRef = useRef(null);
@@ -59,7 +60,7 @@ export default function AnimatedHeading({ delay = 0 }: { delay?: number }) {
           variants={slideUpWithY}
           className="text-m-text col-start-4 row-start-2 flex items-center justify-center"
         >
-          Stack
+          <StackSvg className="fill-m-text w-[15dvw]" />
         </motion.span>
         <motion.span
           variants={slideUpWithY}
