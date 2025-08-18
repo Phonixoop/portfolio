@@ -16,55 +16,34 @@ export const metadata: Metadata = {
 const iranSans = localFont({
   src: [
     {
-      path: "../../public/fonts/iransans/IRANSansXFaNum-Thin.woff",
-      weight: "100",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/iransans/IRANSansXFaNum-UltraLight.woff",
+      path: "../../public/fonts/iransans/IRANSansWeb_UltraLight.woff2",
       weight: "200",
       style: "normal",
     },
     {
-      path: "../../public/fonts/iransans/IRANSansXFaNum-Light.woff",
+      path: "../../public/fonts/iransans/IRANSansWeb_Light.woff2",
       weight: "300",
       style: "normal",
     },
     {
-      path: "../../public/fonts/iransans/IRANSansXFaNum-Regular.woff",
+      path: "../../public/fonts/iransans/IRANSansWeb.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/iransans/IRANSansXFaNum-Medium.woff",
+      path: "../../public/fonts/iransans/IRANSansWeb_Medium.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../../public/fonts/iransans/IRANSansXFaNum-DemiBold.woff",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/iransans/IRANSansXFaNum-Bold.woff",
+      path: "../../public/fonts/iransans/IRANSansWeb_Bold.woff2",
       weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/iransans/IRANSansXFaNum-ExtraBold.woff",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/iransans/IRANSansXFaNum-Black.woff",
-      weight: "900",
       style: "normal",
     },
   ],
   variable: "--font-iransans",
   display: "swap",
 });
-
 const kabel = localFont({
   src: [
     {

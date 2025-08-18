@@ -58,9 +58,12 @@ export default function AnimatedHeading({ delay = 0 }: { delay?: number }) {
         </motion.span>
         <motion.span
           variants={slideUpWithY}
-          className="text-m-text col-start-4 row-start-2 flex items-center justify-center"
+          className={cn(
+            "text-m-text col-start-3 row-start-2 flex items-center justify-center sm:leading-14 xl:leading-32",
+          )}
         >
-          <StackSvg className="fill-m-text w-[15dvw]" />
+          Stack
+          {/* <StackSvg className="fill-m-text w-[17dvw]" /> */}
         </motion.span>
         <motion.span
           variants={slideUpWithY}

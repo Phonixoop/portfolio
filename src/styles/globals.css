@@ -4,67 +4,38 @@
   box-sizing: border-box;
 }
 @font-face {
-  font-family: "IRANSansXFaNum";
-  src: url("/fonts/iransanss/IRANSansXFaNum-Thin.woff") format("woff");
-  font-weight: 100;
-}
-
-@font-face {
-  font-family: "IRANSansXFaNum";
-  src: url("/fonts/iransanss/IRANSansXFaNum-UltraLight.woff") format("woff");
+  font-family: "IRANSansWeb";
+  src: url("/fonts/iransans/IRANSansWeb_UltraLight.woff2") format("woff2");
   font-weight: 200;
 }
 
 @font-face {
-  font-family: "IRANSansXFaNum";
-  src: url("/fonts/iransanss/IRANSansXFaNum-Light.woff") format("woff");
+  font-family: "IRANSansWeb";
+  src: url("/fonts/iransans/IRANSansWeb_Light.woff2") format("woff2");
   font-weight: 300;
 }
 
 @font-face {
-  font-family: "IRANSansXFaNum";
-  src: url("/fonts/iransanss/IRANSansXFaNum-Regular.woff") format("woff");
+  font-family: "IRANSansWeb";
+  src: url("/fonts/iransans/IRANSansWeb.woff2") format("woff2");
   font-weight: 400;
 }
 
 @font-face {
-  font-family: "IRANSansXFaNum";
-  src: url("/fonts/iransanss/IRANSansXFaNum-Medium.woff") format("woff");
+  font-family: "IRANSansWeb";
+  src: url("/fonts/iransans/IRANSansWeb_Medium.woff2") format("woff2");
   font-weight: 500;
 }
 
 @font-face {
-  font-family: "IRANSansXFaNum";
-  src: url("/fonts/iransanss/IRANSansXFaNum-DemiBold.woff") format("woff");
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: "IRANSansXFaNum";
-  src: url("/fonts/iransanss/IRANSansXFaNum-Bold.woff") format("woff");
+  font-family: "IRANSansWeb";
+  src: url("/fonts/iransans/IRANSansWeb_Bold.woff2") format("woff2");
   font-weight: 700;
 }
-
-@font-face {
-  font-family: "IRANSansXFaNum";
-  src: url("/fonts/iransanss/IRANSansXFaNum-ExtraBold.woff") format("woff");
-  font-weight: 800;
-}
-
-@font-face {
-  font-family: "IRANSansXFaNum";
-  src: url("/fonts/iransanss/IRANSansXFaNum-Black.woff") format("woff");
-  font-weight: 900;
-}
-@font-face {
-  font-family: kabel;
-  src: url("/fonts/kabel/kabel.ttf") format("ttf");
-}
-
 @theme {
   --font-iransans: "Iransans", ui-sans-serif, system-ui, sans-serif;
-  --font-kabel: "oswald", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Oswald", sans-serif;
+  --font-kabel: "kabel", ui-sans-serif, system-ui, sans-serif;
+
   --radius-me-radius-card: 35px;
 
   --color-foregroundRGB: 10, 10, 10;
@@ -91,7 +62,6 @@
   [data-theme="dark"] {
     --font-iransans: "Iransans", ui-sans-serif, system-ui, sans-serif;
     --font-kabel: "kabel", ui-sans-serif, system-ui, sans-serif;
-    --font-display: "Oswald", sans-serif;
 
     --color-foregroundRGB: 248, 248, 248;
     --color-back: 0, 0, 0;
@@ -441,4 +411,14 @@
   &::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
+}
+
+.mask-stack {
+  -webkit-mask-image: url(../../public/svg/mask-stacking.svg);
+  mask-image:
+    url(../../public/svg/mask-stacking.svg),
+    linear-gradient(rgb(0, 0, 0) 25%, transparent 35%);
+
+  mask-position: 1% 20%;
+  mask-repeat: repeat-x;
 }

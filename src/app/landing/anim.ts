@@ -6,10 +6,12 @@ export const slideUpWithY: Variants = {
   },
   open: (i: number) => ({
     y: "0%",
+
     transition: { duration: 0.5 }, // base delay + per-item delay
   }),
   closed: {
     y: "120%",
+
     transition: { duration: 0.5, delay: 0.3 },
   },
 };
