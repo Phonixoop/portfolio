@@ -9,6 +9,7 @@ import {
   type Variants,
   stagger,
   useSpring,
+  useMotionTemplate,
 } from "motion/react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState, type ReactElement } from "react";
@@ -169,6 +170,7 @@ export default function DividerProgress({
             [progress, trigger],
             ([val, _t]: number[]) => {
               const width = widthRef.current;
+
               if (width === 0) return padding + k * gap;
 
               const moveStep = length - k;
@@ -187,6 +189,14 @@ export default function DividerProgress({
             },
           );
 
+          const background = useMotionTemplate`
+            linear-gradient(
+               ${xPos}deg,
+                var(--color-m-primary) 0%,
+              rgba(226, 201, 173, 0.5) ${!hovered ? xPos : 900}%
+            )
+          `;
+
           return (
             // circle
             <motion.li
@@ -199,7 +209,7 @@ export default function DividerProgress({
 
                 // "absolute top-1/2 left-0 size-6 -translate-1/2 rounded-full",
                 hovered
-                  ? "text-m-background bg-m-text relative min-w-40 rounded-full p-2"
+                  ? "bg-m-text relative min-w-40 rounded-full p-2 text-white"
                   : "text-m-text-sub bg-m-text absolute top-1/2 left-0 size-6 -translate-1/2 rounded-full",
 
                 hovered && item?.isIcon && "size-11 min-w-12",
@@ -208,7 +218,9 @@ export default function DividerProgress({
                 ...(!hovered && { x: xPos }),
                 position: hovered ? "relative" : "absolute",
                 zIndex: length - k,
+                // background: `linear-gradient(45deg, rgb(255,255,255,1) ${100 - colorPercentageABS}%, rgba(226, 201, 173, 0.5) ${colorPercentageABS}%)`,
                 transformOrigin: "center",
+                background: background,
               }}
             >
               {/* {Array.from({ length: length - k }).map((_, i) => (

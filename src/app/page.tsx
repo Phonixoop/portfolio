@@ -79,6 +79,7 @@ export default function LandingPage() {
         <TopWidget />
         <HeroSection startAnimation={!showPreloader} />
         <ProjectsSection />
+        <ProjectsSection />
       </div>
     </main>
   );
