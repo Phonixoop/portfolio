@@ -5,7 +5,7 @@ import { motion, type Variants } from "motion/react";
 export default function SubHeading({ delay }: { delay?: number }) {
   return (
     <>
-      <h2 className="text-m-foreground/40 font-iransans text-center text-sm font-light">
+      <h2 className="text-m-foreground/40 font-iransans z-10 text-center text-sm font-light">
         {/* <StaggerPhraseAnim
           delay={delay}
           text="My Goal is to Solve Problems at the intersection of business and

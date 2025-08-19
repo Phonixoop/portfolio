@@ -39,6 +39,7 @@ export default function BottomWidget() {
           bottom: 0,
         },
       }}
+      id="bottom-widget-container"
       className="fixed bottom-0 flex w-full items-center justify-center"
     >
       <motion.div
@@ -59,7 +60,7 @@ export default function BottomWidget() {
             borderBottomRightRadius: 0,
           },
         }}
-        className="bg-m-background/80 grid grid-cols-2 items-center justify-between gap-14 rounded-3xl p-5 backdrop-blur-xl"
+        className="bg-m-light grid grid-cols-2 items-center justify-between gap-14 rounded-3xl p-5 backdrop-blur-xl"
       >
         <div className="w-[100px] items-center justify-center">
           <motion.svg viewBox="0 0 99 105" className={"size-[100px]"}>

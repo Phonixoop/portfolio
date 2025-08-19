@@ -1,6 +1,13 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, useMotionValueEvent, useTime } from "motion/react";
+import React, { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  AnimatePresence,
+  useMotionValueEvent,
+  useScroll,
+  useTime,
+  useTransform,
+  motion,
+} from "motion/react";
 import Preloader2 from "~/app/components/me/preloader/version2";
 import { cn } from "~/lib/utils";
 import TopWidget from "~/app/landing/top-widget";
@@ -8,6 +15,7 @@ import HeroSection from "~/app/(sections)/hero";
 import ProjectsSection from "~/app/(sections)/2";
 import type LocomotiveScroll from "locomotive-scroll";
 import MorseBlinker from "~/app/components/me/morse-code-blinker";
+import BottomWidget from "~/app/landing/bottom-widget";
 
 export default function LandingPage() {
   const [scrollReady, setScrollReady] = useState(false);
@@ -27,7 +35,11 @@ export default function LandingPage() {
   useEffect(() => {
     (async () => {
       const LocomotiveScroll = (await import("locomotive-scroll")).default;
-      locomotiveScrollRef.current = new LocomotiveScroll();
+      locomotiveScrollRef.current = new LocomotiveScroll({
+        lenisOptions: {
+          infinite: true,
+        },
+      });
 
       document.body.style.cursor = "default";
       locomotiveScrollRef.current.scrollTo(0, { duration: 0, lerp: 0 });
@@ -70,16 +82,19 @@ export default function LandingPage() {
         className={
           showPreloader
             ? "overflow-hidden opacity-0"
-            : "opacity-100 transition-opacity duration-500"
+            : "h-screen w-full items-center justify-center opacity-100 transition-opacity duration-500"
         }
       >
         <div className="fixed right-5 bottom-5 z-50 blur-xs">
           <MorseBlinker text="Please Hire Me" />
         </div>
         <TopWidget />
+
         <HeroSection startAnimation={!showPreloader} />
+
         <ProjectsSection />
-        <ProjectsSection />
+
+        <BottomWidget />
       </div>
     </main>
   );

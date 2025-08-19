@@ -73,6 +73,23 @@ export default function RootLayout({
           <div className="noise-overlay">
             <div className="noise-overlay-child" />
           </div>
+          <svg className="hidden">
+            <defs>
+              <filter id="liquid">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+                <feColorMatrix
+                  in="name"
+                  mode="matrix"
+                  values="1 0 0 0 0
+                      0 1 0 0 0
+                      0 0 1 0 0
+                      0 0 0 30 -15"
+                />
+                <feBlend in="SourceGraphic" />
+              </filter>
+            </defs>
+          </svg>
+
           {/* <StickyCursor /> */}
         </Provider>
       </body>

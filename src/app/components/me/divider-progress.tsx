@@ -301,22 +301,6 @@ export default function DividerProgress({
           <motion.div className="via-m-text/50 absolute bottom-[0%] left-0 h-[1px] w-full bg-gradient-to-r from-transparent to-transparent" />
         </motion.div>
       </motion.ul>
-      <svg className="hidden">
-        <defs>
-          <filter id="liquid">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
-            <feColorMatrix
-              in="name"
-              mode="matrix"
-              values="1 0 0 0 0
-                      0 1 0 0 0
-                      0 0 1 0 0
-                      0 0 0 30 -15"
-            />
-            <feBlend in="SourceGraphic" />
-          </filter>
-        </defs>
-      </svg>
     </>
   );
 }

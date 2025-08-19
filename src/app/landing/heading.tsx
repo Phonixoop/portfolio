@@ -12,7 +12,7 @@ export default function AnimatedHeading({ delay = 0 }: { delay?: number }) {
     <motion.h1
       ref={headingRef}
       className={cn(
-        "overflow-hidden",
+        "z-10 overflow-hidden",
         "font-kabel",
         "flex flex-col items-center justify-center",
         "text-xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-7xl 2xl:text-8xl",

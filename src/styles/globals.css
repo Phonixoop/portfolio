@@ -216,7 +216,6 @@
   }
   100% {
     width: 100%;
-
     background: transparent;
   }
 }
@@ -374,6 +373,10 @@
 .liquid-filter {
   -webkit-filter: url(#liquid);
   filter: url(#liquid);
+}
+.liquid-filter-2 {
+  -webkit-filter: url(#liquid2);
+  filter: url(#liquid2);
 }
 
 /* ::-webkit-scrollbar {

@@ -101,7 +101,7 @@ export default function Preloader2() {
         initial="initial"
         exit="exit"
         className={
-          "bg-m-background fixed z-[99] flex h-[100vh] w-screen items-end justify-center"
+          "bg-m-background fixed z-[99] flex h-dvh w-screen items-end justify-center"
         }
       >
         {dimension.height > 0 && (
