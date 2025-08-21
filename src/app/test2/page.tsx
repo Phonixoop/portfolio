@@ -1,5 +1,11 @@
 "use client";
-import { motion, useTransform, useScroll, MotionValue } from "motion/react";
+import {
+  motion,
+  useTransform,
+  useScroll,
+  MotionValue,
+  animate,
+} from "motion/react";
 import { useEffect, useRef } from "react";
 import ProjectsSection from "~/app/(sections)/2";
 import HeroSection from "~/app/(sections)/hero";
@@ -63,12 +69,17 @@ const HorizontalScrollCarousel = ({
     case "ltr":
       x = useTransform(
         scrollYProgress,
-        [0, 0.65, 1],
-        ["0%", "-95dvw", "-95dvw"],
+        [0, 0.55, 1],
+        ["-5dwv", "-100dvw", "-100dvw"],
       );
       break;
     case "rtl":
-      x = useTransform(scrollYProgress, [0, 0.65, 1], ["0%", "95dvw", "95dvw"]);
+      1;
+      x = useTransform(
+        scrollYProgress,
+        [0, 0.55, 1],
+        ["-195dvw", "-100vw", "-100dvw"],
+      );
       break;
     case "ttb":
       y = useTransform(
@@ -81,19 +92,23 @@ const HorizontalScrollCarousel = ({
       y = useTransform(scrollYProgress, [0, 0.65, 1], ["0%", "95dvh", "95dvh"]);
       break;
   }
-
+  const jumpToEnd = () => {
+    if (targetRef.current) {
+      const endScroll = targetRef.current.scrollHeight - window.innerHeight;
+      window.scrollTo({ top: endScroll, behavior: "smooth" });
+    }
+  };
   const scaleAndOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-
   return (
-    <div ref={targetRef} className="bg-m-background relative h-[300vh]">
+    <div ref={targetRef} className="bg-m-background relative h-[200dvh]">
       {" "}
       <div className="sticky top-0 flex h-screen items-center overflow-hidden overflow-x-hidden">
         {" "}
-        <motion.div className="flex h-screen snap-x gap-4">
+        <motion.div className="liquid-filter flex h-screen">
           {" "}
           <motion.div
             style={{ scale: scaleAndOpacity, opacity: scaleAndOpacity }}
-            className="z-0 w-[95dvw] overflow-hidden"
+            className="z-0 w-[100dvw] overflow-hidden"
           >
             {" "}
             <HeroSection />{" "}

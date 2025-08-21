@@ -15,7 +15,7 @@ export default function AnimatedHeading({ delay = 0 }: { delay?: number }) {
         "z-10 overflow-hidden",
         "font-kabel",
         "flex flex-col items-center justify-center",
-        "text-xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-7xl 2xl:text-8xl",
+        "text-2xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-7xl 2xl:text-8xl",
         "gap-2 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10",
       )}
       variants={parentVariants(delay)}
@@ -46,8 +46,9 @@ export default function AnimatedHeading({ delay = 0 }: { delay?: number }) {
       <div
         className={cn(
           "flex w-full items-center justify-center gap-2",
-          // "ml-[97px] sm:ml-[177px] sm:gap-4 md:ml-[177px] lg:ml-[240px] lg:gap-6 xl:ml-[338px] 2xl:ml-[435px]",
-          "ml-[61px] sm:ml-[115px] sm:gap-4 md:ml-[115px] lg:ml-[158px] lg:gap-6 xl:ml-[208px] 2xl:ml-[265px]",
+
+          // "ml-[61px] sm:ml-[115px] sm:gap-4 md:ml-[115px] lg:ml-[158px] lg:gap-6 xl:ml-[208px] 2xl:ml-[265px]",
+          "sm:ml-[115px] sm:gap-4 md:ml-[115px] lg:ml-[158px] lg:gap-6 xl:ml-[208px] 2xl:ml-[265px]",
         )}
       >
         <motion.span

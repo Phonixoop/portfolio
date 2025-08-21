@@ -5,6 +5,7 @@ import SubHeading from "~/app/landing/sub-heading";
 import { motion, stagger, type Variants } from "motion/react";
 import DividerProgress from "~/app/components/me/divider-progress";
 import AnimatedHeading from "~/app/landing/heading";
+import AnimatedText from "~/app/components/me/animation/split-text";
 
 const defaultAnimation: Variants = {
   hidden: { left: "50%", x: "-50%" },
@@ -22,6 +23,7 @@ export default function PageTest() {
   return (
     <>
       <div className="flex h-screen flex-col items-center justify-center gap-5">
+        <AnimatedText text="PROJECTS" />
         <AnimatedHeading delay={0} />
         <motion.svg
           viewBox={`0 0 1920 1080`}

@@ -1,106 +1,63 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "motion/react";
-
-import HeroSection from "~/app/(sections)/hero";
-import ProjectsSection from "~/app/(sections)/2";
-// import AboutSection from "~/app/(sections)/about";
-// import ContactSection from "~/app/(sections)/contact";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  MotionValue,
+  useMotionValueEvent,
+} from "motion/react";
 
 type EnterDir = "rtl" | "ltr" | "ttb" | "btt" | "flow";
 
 type SectionSpec = {
-  id: string;
-  Component: React.ComponentType;
-  /** how this section ENTERS when it becomes visible */
+  id: any;
+  Component: any;
   enter: EnterDir;
-  /** optional preview while off-screen (device units) */
-  peekVW?: number; // e.g. 5 => 5dvw visible from side
-  peekVH?: number; // e.g. 5 => 5dvh visible from top/bottom
+  peekVW?: number;
+  peekVH?: number;
 };
 
-function First() {
-  return <div className="h-screen w-screen bg-emerald-950"></div>;
+function First({ children }: { children: any }) {
+  return (
+    <div className="flex h-screen w-screen items-center justify-center bg-emerald-950 text-4xl text-white">
+      {children}
+    </div>
+  );
 }
-function Second() {
-  return <div className="h-screen w-screen bg-pink-950"></div>;
+function Second({ children }: { children: any }) {
+  return (
+    <div className="flex h-screen w-screen items-center justify-center bg-yellow-950 text-4xl text-white">
+      {children}
+    </div>
+  );
 }
-function Third() {
-  return <div className="h-screen w-screen bg-amber-950"></div>;
+function Third({ children }: { children: any }) {
+  return (
+    <div className="flex h-screen w-screen items-center justify-center bg-red-950 text-4xl text-white">
+      {children}
+    </div>
+  );
 }
-/** Configure your chain (order matters) */
-const SECTIONS: SectionSpec[] = [
-  { id: "hero", Component: First, enter: "rtl" },
-  { id: "projects", Component: Second, enter: "rtl", peekVW: 5 },
-  {
-    id: "Third",
-    Component: Third,
-    enter: "ltr",
-    peekVW: 5,
-  },
 
-  // { id: "about",    Component: AboutSection,    enter: "ttb" },
-  // { id: "contact",  Component: ContactSection,  enter: "flow" },
+const SECTIONS: SectionSpec[] = [
+  { id: 0, Component: First, enter: "rtl", peekVW: 0 },
+  { id: 1, Component: Second, enter: "rtl", peekVW: 5 },
+  { id: 2, Component: Third, enter: "rtl", peekVW: 5 },
 ];
 
 export default function Page() {
   const N = SECTIONS.length;
-  const transitions = Math.max(0, N - 1);
-
-  // If only one section, render it directly
-  if (transitions === 0) {
-    const Only = SECTIONS[0]?.Component ?? (() => <div>Loading...</div>);
-    return <Only />;
-  }
+  const transitions = Math.max(1, N - 1);
 
   const targetRef = useRef<HTMLDivElement>(null);
-
-  // Make the wrapper height exactly one viewport per transition
-  // -> one "scroll" drives exactly one pair animation.
   const containerHeight = `${transitions * 100}vh`;
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start start", "end end"], // clean 0..1 mapping along the wrapper
+    offset: ["start start", "end end"],
   });
-
-  const step = 1 / transitions;
-
-  // Keep the active pair index in state (0..transitions-1)
-  const [pairIndex, setPairIndex] = useState(0);
-
-  useEffect(() => {
-    const unsub = scrollYProgress.on("change", (p) => {
-      const raw = Math.floor(p / step);
-      const i = Math.max(0, Math.min(raw, transitions - 1));
-      setPairIndex(i);
-    });
-    return () => unsub();
-  }, [scrollYProgress, step, transitions]);
-
-  // Normalized progress in the current pair [0..1]
-  const pairStart = pairIndex * step;
-  const pairEnd = (pairIndex + 1) * step;
-  const t = useTransform(scrollYProgress, [pairStart, pairEnd], [0, 1]);
-
-  // Active sections
-  const outgoing = SECTIONS[pairIndex]!;
-  const incoming = SECTIONS[pairIndex + 1]!;
-
-  // Outgoing transforms (scale down & fade out)
-  const outScale = useTransform(t, [0, 1], [1, 0]);
-  const outOpacity = useTransform(t, [0, 1], [1, 0]);
-
-  // Incoming transforms (slide in based on its own enter direction)
-  const { inX, inY } = incomingTransforms(incoming, t);
-
-  // z-index: ensure stable overlap (incoming above outgoing)
-  const zOutgoing = pairIndex * 2 + 1;
-  const zIncoming = pairIndex * 2 + 2;
-
-  const OutComp = outgoing.Component;
-  const InComp = incoming.Component;
 
   return (
     <div
@@ -109,67 +66,94 @@ export default function Page() {
       style={{ height: containerHeight }}
     >
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Outgoing (beneath) */}
-        <motion.div
-          className="absolute inset-0 will-change-transform"
-          style={{
-            scale: outScale,
-            opacity: outOpacity,
-            zIndex: zOutgoing as number,
-          }}
-        >
-          <OutComp />
-        </motion.div>
+        {SECTIONS.map((section, i) => {
+          let scale = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
-        {/* Incoming (above) */}
-        <motion.div
-          className="absolute inset-0 will-change-transform"
-          style={{ x: inX, y: inY, zIndex: zIncoming as number }}
-        >
-          <InComp />
-        </motion.div>
+          const pvI = Math.max(i - 1, 0);
+          const currentI = i;
+          const nextI = Math.min(i + 2, SECTIONS.length - 1);
+
+          const { inX: x1 } = sectionTransforms(section, scrollYProgress, i);
+
+          const { inX: x2 } = sectionTransforms(
+            section,
+            scrollYProgress,
+            i + 1,
+          );
+          const x3 = useTransform(
+            scrollYProgress,
+            [0, 1],
+            ["-100dvw", `${section.peekVW}dvw`],
+          );
+          return (
+            <motion.div
+              key={section.id}
+              className="absolute inset-0 will-change-transform"
+              style={{
+                x: x1,
+                scale: section.id === pvI ? scale : 1,
+                zIndex: i,
+              }}
+            >
+              <section.Component>
+                <div className="flex flex-col">
+                  <motion.span> index : {i}</motion.span>
+                  <motion.span>{x1}</motion.span>
+                </div>
+              </section.Component>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-/** Compute incoming x/y offsets with optional peek in dvw/dvh. */
-function incomingTransforms(
+function sectionTransforms(
   section: SectionSpec,
   t: MotionValue<number>,
+  index: number,
 ): { inX?: MotionValue<string>; inY?: MotionValue<string> } {
   const peekVW = section.peekVW ?? 0;
   const peekVH = section.peekVH ?? 0;
 
-  // Start positions using device viewport units (dvw/dvh)
-  // Example: "rtl" enters from the right; show `peekVW` dvw peeking in.
   let startX: string | null = null;
   let startY: string | null = null;
 
+  let leftOrRight = 0;
+  const distance = 100 * index;
   switch (section.enter) {
     case "rtl":
-      startX = `${100 - peekVW}dvw`; // from right
+      startX = `${distance - peekVW}dvw`;
+      leftOrRight = 1;
       break;
     case "ltr":
-      startX = `${-100 + peekVW}dvw`; // from left
+      leftOrRight = -1;
+      startX = `${-distance + peekVW}dvw`;
       break;
     case "ttb":
-      startY = `${-100 + peekVH}dvh`; // from top
+      startY = `${-distance + peekVH}dvh`;
       break;
     case "btt":
-      startY = `${100 - peekVH}dvh`; // from bottom
+      startY = `${distance - peekVH}dvh`;
       break;
     case "flow":
-      // "flow" = subtle vertical slide-in (optional)
       startY = `10dvh`;
       break;
   }
 
   const inX =
-    startX !== null ? useTransform(t, [0, 1], [startX, "0dvw"]) : undefined;
-
+    startX !== null
+      ? useTransform(
+          t,
+          [0, 1],
+          [`${leftOrRight * distance - peekVW}dvw`, "0dvw"],
+        )
+      : undefined;
   const inY =
     startY !== null ? useTransform(t, [0, 1], [startY, "0dvh"]) : undefined;
 
   return { inX, inY };
 }
+
+// TODO : add svg fluid to page

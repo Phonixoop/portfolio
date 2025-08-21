@@ -27,9 +27,10 @@ const variants: Variants = {
   },
 };
 
-const menuItems = [
+export const menuItems = [
   { text: "Projects", link: "/#projects", isIcon: false },
   { text: "Skills", link: "/#skills", isIcon: false },
+  { text: <HomeIcon />, link: "#", isIcon: true },
   { text: <HomeIcon />, link: "#", isIcon: true },
 ];
 
@@ -60,7 +61,7 @@ export default function TopWidget() {
       <motion.div
         variants={variants}
         initial="initial"
-        animate={isOpen ? "open" : "closed"}
+        animate={false ? "open" : "closed"}
         onHoverStart={() => setIsHovering(true)}
         onHoverEnd={() => setIsHovering(false)}
         onClick={() => setIsHovering(true)}
@@ -68,7 +69,7 @@ export default function TopWidget() {
         className="bg-m-dark/80 relative flex w-full items-center justify-center gap-14 overflow-hidden rounded-3xl backdrop-blur-xl"
       >
         <nav className="flex h-full w-full items-start justify-center">
-          <DividerProgress hovered={isOpen} items={menuItems} />
+          <DividerProgress hovered={false} items={menuItems} />
         </nav>
       </motion.div>
     </motion.div>

@@ -239,14 +239,14 @@ export default async function Home() {
                       className="font-iransans hover:bg-m-background/50 relative flex w-[calc(100%)] items-center gap-3 overflow-hidden rounded-xl p-3 text-sm outline-0 hover:backdrop-blur-3xl"
                     >
                       <HyperText2
-                        className="text-m-text inline-block font-bold"
+                        className="text-m-text inline-block truncate font-bold"
                         duration={250}
                       >
                         {project.title}
                       </HyperText2>
 
                       <HyperText2
-                        className="text-m-text/70 inline-block font-light"
+                        className="text-m-text/70 hidden font-light md:inline-block"
                         duration={250}
                         delay={250}
                       >
