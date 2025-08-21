@@ -25,7 +25,6 @@ import { HyperText2 } from "~/app/components/magicui/hyper-text-2";
 import { MotionEl } from "~/app/components/motion/motion-element";
 import MagneticGsap from "~/app/components/me/magnet-gsap";
 import StaggerContainer from "~/app/components/motion/stagger-container";
-import { projects } from "~/app/(sections)/2/projects";
 
 const skills = [
   {
@@ -52,6 +51,40 @@ const skills = [
     title: "Socket",
     link: "https://socket.io/",
     icon: <BrandSocketIO />,
+  },
+];
+
+const projects = [
+  {
+    title: "Instant Gifting",
+    description:
+      "Eco-friendly digital gift platform with unique shareable links",
+    year: "2024",
+    href: "#",
+  },
+  {
+    title: "KPI tracking",
+    description: "Automated KPI tracking with real-time dashboards",
+    year: "2023",
+    href: "/projects/performance-automation",
+  },
+  {
+    title: "Room Reservation",
+    description: "Conflict-free meeting room booking with optional services",
+    year: "2023",
+    href: "#",
+  },
+  {
+    title: "Food Delivery",
+    description: "Custom meal builder and scheduled deliveries",
+    year: "2022",
+    href: "#",
+  },
+  {
+    title: "Catering Planner",
+    description: "Legacy system upgrade with multi-role meal planning",
+    year: "2022",
+    href: "#",
   },
 ];
 export default async function Home() {

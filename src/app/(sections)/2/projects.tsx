@@ -5,7 +5,7 @@ import { HyperText2 } from "~/app/components/magicui/hyper-text-2";
 import { MotionEl } from "~/app/components/motion/motion-element";
 import { motion, useInView } from "motion/react";
 import { cn } from "~/lib/utils";
-export const projects = [
+const projects = [
   {
     title: "Instant Gifting",
     description:
