@@ -30,8 +30,6 @@ const variants: Variants = {
 export const menuItems = [
   { text: "Projects", link: "/#projects", isIcon: false },
   { text: "Skills", link: "/#skills", isIcon: false },
-  { text: <HomeIcon />, link: "#", isIcon: true },
-  { text: <HomeIcon />, link: "#", isIcon: true },
 ];
 
 export default function TopWidget() {

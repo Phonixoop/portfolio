@@ -56,6 +56,15 @@
   --radius: 0.65rem;
 
   --line-offset: 150px;
+
+  --text-m-2m: clamp(0.6944rem, 0.6624rem + 0.1604vw, 0.809rem);
+  --text-m-1m: clamp(0.8333rem, 0.7647rem + 0.343vw, 1.0784rem);
+  --text-m-0: clamp(1rem, 0.8775rem + 0.6124vw, 1.4375rem);
+  --text-m-1: clamp(1.2rem, 0.9995rem + 1.0025vw, 1.9162rem);
+  --text-m-2: clamp(1.44rem, 1.128rem + 1.5598vw, 2.5543rem);
+  --text-m-3: clamp(1.728rem, 1.2585rem + 2.3473vw, 3.4049rem);
+  --text-m-4: clamp(2.0736rem, 1.3835rem + 3.4507vw, 4.5387rem);
+  --text-m-5: clamp(2.4883rem, 1.4912rem + 4.9858vw, 6.05rem);
 }
 
 @layer base {

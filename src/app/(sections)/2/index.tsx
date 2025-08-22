@@ -6,12 +6,16 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="bg-m-background relative flex h-full w-full flex-col items-center justify-center gap-20 overflow-hidden rounded-4xl"
+      className="bg-m-background relative flex h-full w-full flex-col items-center justify-center gap-20 overflow-hidden rounded-4xl p-2 md:p-0"
     >
-      <h2 className="text-m-text absolute top-1/2 -left-48 hidden -translate-y-1/2 rotate-90 text-4xl font-bold tracking-[2.5rem] md:visible">
+      {/* <h2 className="text-m-text absolute top-1/2 -left-48 hidden -translate-y-1/2 rotate-90 text-4xl font-bold tracking-[2.5rem] md:visible">
         Projects
-      </h2>
-      <AnimatedText gap={30} className="text-4xl" text="Projects" />
+      </h2> */}
+      <AnimatedText
+        gap={30}
+        className="text-m-text flex items-center justify-center text-3xl md:text-4xl"
+        text="Projects"
+      />
       <motion.div
         // initial={{
         //   y: 100,

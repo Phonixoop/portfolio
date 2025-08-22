@@ -13,7 +13,7 @@ export default function SubHeading({ delay }: { delay?: number }) {
         /> */}
         <StaggerPhraseAnim
           delay={delay}
-          className="flex max-w-2xs flex-wrap items-center justify-center"
+          className="text-m-2m flex max-w-2xs flex-wrap items-center justify-center"
           text="My goal is to puzzle out where Polish design meets innovative technology to create impactful solutions."
         />
       </h2>
