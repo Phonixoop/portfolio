@@ -1,31 +1,47 @@
-import * as React from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { forwardRef, useRef } from "react";
 
 type AudioWaveProps = {
   className?: string;
 };
 
-export const AudioWave = React.forwardRef<
+export const AudioWave = forwardRef<
   HTMLDivElement,
   AudioWaveProps & { containerRef?: React.RefObject<HTMLDivElement> }
 >(({ className, containerRef, ...props }, ref) => {
   // Use the passed ref, fallback to internal ref if not provided
+
   const { scrollYProgress } = useScroll({
-    target: containerRef ?? (ref as React.RefObject<HTMLDivElement>),
-    offset: ["start start", "35% start"],
+    //target: containerRef ?? (ref as React.RefObject<HTMLDivElement>),
+    offset: ["center", "end end"],
   });
 
   // Map scrollYProgress (0 to 1) to y movement (0 to 40)
   const y = useTransform(scrollYProgress, [0, 1], [0, 43]);
+  const skewX = useTransform(scrollYProgress, [0, 1], [0, -45]);
+  const skewY = useTransform(scrollYProgress, [0, 1], [0, 15]);
 
   return (
     <>
+      {" "}
+      <foreignObject width="466.955" height="269.029" x="10.256" y="91.988">
+        <div
+          style={{
+            clipPath: "url(#bgblur_4_340_139_clip_path)",
+            backdropFilter: "blur(25px)",
+            height: "100%",
+            width: "100%",
+          }}
+        ></div>
+      </foreignObject>
       <motion.svg
-        initial="rest"
-        whileHover="hover"
         className={className}
         fill={"none"}
         viewBox="0 0 607 366"
+        style={{
+          skewX,
+          skewY,
+        }}
       >
         <g id="Group 4">
           <g id="Bubble Group">
@@ -80,21 +96,6 @@ export const AudioWave = React.forwardRef<
           </g>
           <g id="Group 3">
             <g id="Group 1">
-              <foreignObject
-                width="466.955"
-                height="269.029"
-                x="10.256"
-                y="91.988"
-              >
-                <div
-                  style={{
-                    clipPath: "url(#bgblur_4_340_139_clip_path)",
-                    backdropFilter: "blur(25px)",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                ></div>
-              </foreignObject>
               <g
                 id="Vector_5"
                 fill="#B17762"
@@ -491,10 +492,6 @@ export const AudioWave = React.forwardRef<
 
               <motion.g
                 id="Floated Group"
-                // variants={{
-                //   rest: { y: 0 },
-                //   hover: { y: "44px" }, // move up 20px
-                // }}
                 style={{ y }}
                 transition={{ duration: 0.2, ease: "linear" }}
               >

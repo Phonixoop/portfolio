@@ -62,7 +62,7 @@ export default function HeroSection({
     await controls.start("initial");
     await controls.start("enter");
   };
-  const audioWaveContainerRef = useRef<any>(null);
+
   return (
     <>
       <motion.div

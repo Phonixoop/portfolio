@@ -37,7 +37,9 @@ export default function LandingPage() {
       const LocomotiveScroll = (await import("locomotive-scroll")).default;
       locomotiveScrollRef.current = new LocomotiveScroll({
         lenisOptions: {
-          infinite: true,
+          duration: 1, // higher = slower scroll
+
+          lerp: 0.8, // smaller = smoother & slower, bigger = faster catch-up
         },
       });
 
